@@ -51,15 +51,17 @@ int main()
 
         else if(choice == 2)
         {
-            cout<<"Please enter one letter at a time, followed by the enter key."<<endl;
-            cout<<"Letters will be stored left to right, top to bottom."<<endl;
+            cout<<"Please enter one row (4 letters, no spaces) at a time, each followed by the enter key."<<endl;
             vector<char> letters;
-            for(int i = 0; i < 16; i++)
+            for(int i = 0; i < 4; i++)
             {
-                char letter;
-                cin >> letter;
-                letters.push_back(letter);
-            }
+                char row[4];
+                cin >> row;
+		for(int i = 0; i < 4; i++)
+		{
+                    letters.push_back(row[i]);
+		}
+	    }
             cout<<endl;
             boggle.FillBoardUser(letters);
             boggle.PrintBoard();
@@ -76,7 +78,6 @@ int main()
             {
                 for(int j = 0; j < 4; j++)
                 {
-		    cout<<i<<j<<endl;
                     boggle.FindWords(NULL, i,j);
                 }
             }

@@ -16,6 +16,7 @@ Dictionary::~Dictionary()
 
 void Dictionary::addWord(string word)
 {
+    // trie, aka prefix tree is constructed
     Node* z = new Node;
     z->word = word;
     z->l = NULL;
@@ -87,9 +88,18 @@ bool Dictionary::isPrefix(Node* subTree, string word)
     {
         return isPrefix(subTree->r, word);
     }
-
-    cout<<"ERROR: dictionary.cpp line 91";
-    return false;
+    
+    else	// is a full word
+    {
+	if(subTree->l != NULL or subTree->r != NULL)
+	{
+	    return true;
+	}
+	else
+	{
+	    return false;
+	}
+    }
 }
 
 bool Dictionary::isWordPublic(string word)

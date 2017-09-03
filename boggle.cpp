@@ -130,7 +130,6 @@ void Boggle::FindWords(Tile* prev, int i, int j)
 
         string candidate = BuildWord(new_tile);
 
-//	cout<<candidate<<endl;
 
         if(prev != NULL)
         {
@@ -138,7 +137,6 @@ void Boggle::FindWords(Tile* prev, int i, int j)
             {
                 if(english->isWordPublic(candidate))
                 {
-		    cout<<"word found"<<endl;
                     words.push_back(candidate);
                 }
             }

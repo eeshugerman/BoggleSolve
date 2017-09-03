@@ -21,6 +21,7 @@ for word in sol:
         in_dict.append(word)
 print '{} of which are in dictionary'.format(len(in_dict))
 
+print ''
 
 missed = []
 for word in ref_sol:
@@ -29,12 +30,15 @@ for word in ref_sol:
 print 'missed {} words:'.format(len(missed))
 for word in missed:
     print word
-
+print ''
 in_dict = []
 for word in missed:
     if word in eng_words:
         in_dict.append(word)
-print '{} of which are in dictionary'.format(len(in_dict))
+print '{} of which are in dictionary:'.format(len(in_dict))
+for word in in_dict:
+    print word
+print ''
 
 
 extra = []
