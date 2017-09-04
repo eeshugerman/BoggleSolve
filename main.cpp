@@ -33,6 +33,7 @@ int main()
         cout<<"3. Print board"		<<endl;
         cout<<"4. Print possible words"	<<endl;
         cout<<"5. Quit"			<<endl;
+        cout<<"6. Read board from file"<<endl;
 
 
         cin >> choice;
@@ -57,11 +58,12 @@ int main()
             {
                 char row[4];
                 cin >> row;
-		for(int i = 0; i < 4; i++)
-		{
-                    letters.push_back(row[i]);
-		}
-	    }
+                
+				for(int i = 0; i < 4; i++)
+				{
+					letters.push_back(row[i]);
+				}
+			}
             cout<<endl;
             boggle.FillBoardUser(letters);
             boggle.PrintBoard();
@@ -93,11 +95,30 @@ int main()
             cout<<"Goodbye!"<<endl;
             break;
         }
+        
+        else if (choice == 6)
+        {
+			ifstream inFile;
+			inFile.open("test_board.txt");
+            vector<char> letters;
+			char row[4];
+			while (inFile >> row)
+			{
+				for(int i = 0; i < 4; i++)
+				{
+					letters.push_back(row[i]);
+				}
+			}	
+			cout<<endl;
+            boggle.FillBoardUser(letters);
+            boggle.PrintBoard();
+				
+		}
 	
-	else
-	{
-	    cout<<"Invalid option, please try again."<<endl;
-	}
+		else
+		{
+			cout<<"Invalid option, please try again."<<endl;
+		}
 	
     }
 
