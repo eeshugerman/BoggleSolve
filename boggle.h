@@ -6,7 +6,6 @@
 #include "dictionary.h"
 
 
-
 struct Tile
 {
     char letter;

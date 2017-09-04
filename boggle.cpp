@@ -1,4 +1,5 @@
 #include "boggle.h"
+#include <fstream>
 #include <random>
 #include <chrono>
 #include <iostream>
@@ -111,10 +112,13 @@ void Boggle::RemoveDuplicateWords()
 void Boggle::PrintWords()
 {
     RemoveDuplicateWords();
-
+	
+	ofstream outFile("solution.txt");
+	
     for(int i = 0; i < (int)words.size(); i++)
     {
-        cout<<words[i]<<endl;
+        cout << words[i] << endl;
+        outFile << words[i] <<endl;
     }
 }
 
