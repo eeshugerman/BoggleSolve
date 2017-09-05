@@ -16,7 +16,6 @@ Dictionary::~Dictionary()
 
 void Dictionary::addWord(string word)
 {
-    // trie, aka prefix tree is constructed
     Node* z = new Node;
     z->word = word;
     z->l = NULL;
@@ -108,11 +107,14 @@ bool Dictionary::isWordPublic(string word)
 
 bool Dictionary::isWord(Node* subTree, string word)
 {
+	if (word == "dun")
+	{
+		cout<<"hi"<<endl;
+	}
     if (subTree == NULL)
     {
         return false;
     }
-
 
     if(word.compare(subTree->word) < 0)
     {

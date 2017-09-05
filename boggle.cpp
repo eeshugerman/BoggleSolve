@@ -151,22 +151,16 @@ void Boggle::FindWords(Tile* prev, int i, int j)
 	{
 		int delta [3] = {-1, 0, 1};
 		
-		//cout <<"current: " << i << ' ' << j << endl;
-
 		for (int del_i_idx = 0; del_i_idx < 4; del_i_idx++)
 		{
 			for (int del_j_idx = 0; del_j_idx < 4; del_j_idx++)
 			{
 				int i_next = i + delta[del_i_idx];
 				int j_next = j + delta[del_j_idx];
-
-				//cout<< "next: " << i_next << ' ' << j_next << endl;
 				
 				if (i_next >= 0 and i_next < 4 and
-				j_next >= 0 and j_next < 4) //and
-				//(i_next != i or j_next != j))
+					j_next >= 0 and j_next < 4)
 				{
-					//cout<< "filter:" << i_next << ' ' << j_next << endl;
 					FindWords(tile, i_next, j_next);
 				}
 			}

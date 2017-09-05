@@ -18,7 +18,7 @@ struct Node
 };
 
 
-class Dictionary
+class Dictionary	    // as a trie, aka prefix tree 
 {
     public:
         Dictionary();
