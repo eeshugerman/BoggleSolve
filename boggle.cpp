@@ -26,10 +26,12 @@ void Boggle::FillBoardUser(vector<char> letters)
     {
         for(int j = 0; j < 4; j++)
         {
-            Tile* new_tile = new Tile;
-            new_tile->letter = letters[k];
-            new_tile->prev = NULL;
-            board[i][j] = new_tile;
+            Tile* tile = new Tile;
+            tile->letter = letters[k];
+            tile->prev = NULL;
+            tile->i = i;
+            tile->j = j;
+            board[i][j] = tile;
             k++;
         }
     }
@@ -48,13 +50,13 @@ void Boggle::FillBoardRandom()
             int rand_int = distribution(generator);
             char rand_char = 'a' + rand_int;
 
-            Tile* new_tile = new Tile;
-            new_tile->letter = rand_char;
-            new_tile->prev = NULL;
-            new_tile->i = i;
-            new_tile->j = j;
+            Tile* tile = new Tile;
+            tile->letter = rand_char;
+            tile->prev = NULL;
+            tile->i = i;
+            tile->j = j;
 
-            board[i][j] = new_tile;
+            board[i][j] = tile;
         }
     }
 }
@@ -73,17 +75,15 @@ void Boggle::PrintBoard()
 
 bool Boggle::CheckVisited(Tile* to_check, Tile* path)
 {
-    bool ans = false;
     while(path)
     {
         if(path->i == to_check->i and path->j == to_check->j)
         {
-            ans = true;
-            break;
+            return true;
         }
         path = path->prev;
     }
-    return ans;
+    return false;
 }
 
 std::string Boggle::BuildWord(Tile* path)
@@ -124,100 +124,58 @@ void Boggle::PrintWords()
 
 void Boggle::FindWords(Tile* prev, int i, int j)
 {
-    if(not CheckVisited(board[i][j], prev))
+    if(CheckVisited(board[i][j], prev))
     {
-        Tile* new_tile = new Tile;
-        new_tile->letter = board[i][j]->letter;
-        new_tile->i = i;
-        new_tile->j = j;
-        new_tile->prev = prev;
+		return;
+	}
 
-        string candidate = BuildWord(new_tile);
+	Tile* tile = new Tile;
+	tile->letter = board[i][j]->letter;
+	tile->i = i;
+	tile->j = j;
+	tile->prev = prev;
+	
+
+	string candidate = BuildWord(tile);
 
 
-        if(prev != NULL)
-        {
-            if(prev->prev != NULL) // is more than 2 letters
-            {
-                if(english->isWordPublic(candidate))
-                {
-                    words.push_back(candidate);
-                }
-            }
-        }
+	if(prev != NULL and prev->prev != NULL)	// more than two letters
+	{
+		if(english->isWordPublic(candidate))
+		{
+			words.push_back(candidate);
+		}
+	}
 
-        if(english->isPrefixPublic(candidate))
-        {
-            if(i == 0 and j == 0) // top left corner
-            {
-                FindWords(new_tile, 1, 0);
-                FindWords(new_tile, 0, 1);
-                FindWords(new_tile, 1 ,1);
-            }
-            else if(i == 0 and j!= 3 and j != 0) // top
-            {
-                FindWords(new_tile, i, j + 1);
-                FindWords(new_tile, i + 1, j + 1);
-                FindWords(new_tile, i + 1, j);
-                FindWords(new_tile, i + 1, j - 1);
-                FindWords(new_tile, i, j - 1);
-            }
-            else if(i == 0 and j == 3) // top right
-            {
-                FindWords(new_tile, 0, 2);
-                FindWords(new_tile, 1, 2);
-                FindWords(new_tile, 1, 3);
-            }
-            else if(j == 3 and i!= 3 and i != 0) //right
-            {
-                FindWords(new_tile, i - 1, j);
-                FindWords(new_tile, i - 1, j - 1);
-                FindWords(new_tile, i, j - 1);
-                FindWords(new_tile, i + 1, j - 1);
-                FindWords(new_tile, i + 1, j);
-            }
-            else if(j == 3 and i == 3) //bottom right
-            {
-                FindWords(new_tile, 2, 3);
-                FindWords(new_tile, 2, 2);
-                FindWords(new_tile, 3, 2);
-            }
-            else if(i == 3 and j!= 3 and j != 0) // bottom
-            {
-                FindWords(new_tile, i, j + 1);
-                FindWords(new_tile, i - 1, j + 1);
-                FindWords(new_tile, i - 1, j);
-                FindWords(new_tile, i - 1, j - 1);
-                FindWords(new_tile, i, j - 1);
-            }
-            else if(i == 3 and j == 0) // bottom left
-            {
-                FindWords(new_tile, 2, 0);
-                FindWords(new_tile, 2, 1);
-                FindWords(new_tile, 3, 1);
+	if(english->isPrefixPublic(candidate))
+	{
+		int delta [3] = {-1, 0, 1};
+		
+		//cout <<"current: " << i << ' ' << j << endl;
 
-            }
-            else if(j == 0 and i!= 3 and i != 0) // left
-            {
-                FindWords(new_tile, i - 1, j);
-                FindWords(new_tile, i - 1, j + 1);
-                FindWords(new_tile, i, j + 1);
-                FindWords(new_tile, i + 1, j + 1);
-                FindWords(new_tile, i + 1, j);
-            }
-            else
-            {
-                FindWords(new_tile, i - 1, j);
-                FindWords(new_tile, i - 1, j + 1);
-                FindWords(new_tile, i, j + 1);
-                FindWords(new_tile, i + 1, j + 1);
-                FindWords(new_tile, i + 1, j);
-                FindWords(new_tile, i + 1, j - 1);
-                FindWords(new_tile, i, j - 1);
-                FindWords(new_tile, i - 1, j - 1);
-            }
-        }
-    }
+		for (int del_i_idx = 0; del_i_idx < 4; del_i_idx++)
+		{
+			for (int del_j_idx = 0; del_j_idx < 4; del_j_idx++)
+			{
+				int i_next = i + delta[del_i_idx];
+				int j_next = j + delta[del_j_idx];
+
+				//cout<< "next: " << i_next << ' ' << j_next << endl;
+				
+				if (i_next >= 0 and i_next < 4 and
+				j_next >= 0 and j_next < 4) //and
+				//(i_next != i or j_next != j))
+				{
+					//cout<< "filter:" << i_next << ' ' << j_next << endl;
+					FindWords(tile, i_next, j_next);
+				}
+			}
+		}
+	}
+	else
+	{
+		return;
+	}
 }
 
 

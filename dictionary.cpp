@@ -69,7 +69,6 @@ bool Dictionary::isPrefix(Node* subTree, string word)
         return false;
     }
 
-
     if(word.length() < subTree->word.length())
     {
         string nodePrefix = subTree->word.substr(0,word.length());
@@ -84,21 +83,21 @@ bool Dictionary::isPrefix(Node* subTree, string word)
         return isPrefix(subTree->l, word);
     }
 
-    if(word.compare(subTree->word) > 0)
+    else if(word.compare(subTree->word) > 0)
     {
         return isPrefix(subTree->r, word);
     }
     
-    else	// is a full word
+    else
     {
-	if(subTree->l != NULL or subTree->r != NULL)
-	{
-	    return true;
-	}
-	else
-	{
-	    return false;
-	}
+		if(subTree->l == NULL and subTree->r == NULL)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
     }
 }
 
@@ -114,21 +113,19 @@ bool Dictionary::isWord(Node* subTree, string word)
         return false;
     }
 
-    if (subTree->word == word)
-    {
-        return true;
-    }
 
     if(word.compare(subTree->word) < 0)
     {
         return isWord(subTree->l, word);
     }
 
-    if(word.compare(subTree->word) > 0)
+    else if(word.compare(subTree->word) > 0)
     {
         return isWord(subTree->r, word);
     }
-
-    cout<<"ERROR: dictionary.cpp line 122";
-    return false;
+    
+    else 
+    {
+		return true;
+	}
 }
