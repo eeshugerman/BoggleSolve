@@ -77,6 +77,7 @@ bool Dictionary::isPrefix(string word)
 			return false;
 		}
 	}
+	
 	for (int x = 0; x < 26; x++)
 	{
 		if (node->children[x])
@@ -84,6 +85,7 @@ bool Dictionary::isPrefix(string word)
 			return true;
 		}
 	}
+	
 	return false;
 }
 

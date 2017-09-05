@@ -95,6 +95,7 @@ std::string Boggle::BuildWord(Tile* path)
         path = path->prev;
     }
     string word(wordV.begin(), wordV.end());
+    reverse(word.begin(), word.end());
     return word;
 }
 
@@ -136,7 +137,10 @@ void Boggle::FindWords(Tile* prev, int i, int j)
 	tile->prev = prev;
 
 	string candidate = BuildWord(tile);
-	//cout<<candidate<<endl;
+	if (candidate == "dung")
+	{
+		cout<<candidate<<endl;
+	}
 	
 	if(prev != NULL and prev->prev != NULL)	// more than two letters
 	{

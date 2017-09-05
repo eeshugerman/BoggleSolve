@@ -1,6 +1,11 @@
 dug
 dun
 dune
+dung
+duty
+end
+entry
+envy
 gnu
 gun
 gut
@@ -12,9 +17,11 @@ tug
 tun
 tune
 tux
+vend
 vent
 vex
 wen
+wend
 went
 wry
 yen
