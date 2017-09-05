@@ -1,8 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <vector>
-//#include <cstddef>
-//#include <string>
+#include <string>
 #include "dictionary.h"
 
 
@@ -12,6 +11,7 @@ struct Tile
     Tile* prev;
     int i;
     int j;
+    
 };
 
 
@@ -35,6 +35,7 @@ class Boggle
         Dictionary* dictionary;
         Tile* board[4][4];
         std::vector<std::string> words;
+        std::vector<Tile*> search_tiles;
 };
 
 

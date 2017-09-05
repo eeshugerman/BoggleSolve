@@ -16,8 +16,19 @@ Boggle::Boggle(Dictionary* dict)
 
 Boggle::~Boggle()
 {
-	//delete board;
-    //delete words;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			delete board[i][j];
+		}
+	}
+	
+	for (unsigned i = 0; i < search_tiles.size(); i++)
+	{
+		delete search_tiles[i];
+	}
+	
 }
 
 void Boggle::FillBoardUser(vector<char> letters)
@@ -115,12 +126,12 @@ void Boggle::PrintWords()
 {
     RemoveDuplicateWords();
 	
-	ofstream outFile("solution.txt");
+	//ofstream outFile("solution.txt");
 	
     for(int i = 0; i < (int)words.size(); i++)
     {
         cout << words[i] << endl;
-        outFile << words[i] <<endl;
+        //outFile << words[i] <<endl;
     }
 }
 
@@ -136,6 +147,8 @@ void Boggle::FindWords(Tile* prev, int i, int j)
 	tile->i = i;
 	tile->j = j;
 	tile->prev = prev;
+	
+	search_tiles.push_back(tile);
 
 	string candidate = BuildWord(tile);
 
@@ -165,10 +178,6 @@ void Boggle::FindWords(Tile* prev, int i, int j)
 				}
 			}
 		}
-	}
-	else
-	{
-		return;
 	}
 }
 

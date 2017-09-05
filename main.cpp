@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include "boggle.h"
 #include "dictionary.h"
 
