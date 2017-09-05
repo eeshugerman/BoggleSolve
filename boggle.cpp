@@ -137,11 +137,7 @@ void Boggle::FindWords(Tile* prev, int i, int j)
 	tile->prev = prev;
 
 	string candidate = BuildWord(tile);
-	if (candidate == "dung")
-	{
-		cout<<candidate<<endl;
-	}
-	
+
 	if(prev != NULL and prev->prev != NULL)	// more than two letters
 	{
 		if(english->isWord(candidate))

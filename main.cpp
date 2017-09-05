@@ -33,7 +33,7 @@ int main()
         cout<<"3. Print board"		<<endl;
         cout<<"4. Print possible words"	<<endl;
         cout<<"5. Quit"			<<endl;
-        cout<<"6. Read board from file"<<endl;
+        //cout<<"6. Read board from file"<<endl;
 
 
         cin >> choice;
