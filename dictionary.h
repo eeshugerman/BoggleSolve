@@ -2,37 +2,35 @@
 #define PREFIXDICTIONARY_H
 #include <string>
 
-struct Node
-{
-    std::string word;
-    Node* parent;
-    Node* l;
-    Node* r;
-    ~Node()
-    {
-        delete l;
-        l = NULL;
-        delete r;
-        r = NULL;
-    }
-};
+
 
 
 class Dictionary	    // as a trie, aka prefix tree 
 {
+	private:
+		class Node
+		{
+			public:
+				Node();
+				~Node();
+				Node* parent;
+				Node* children[26];
+				bool is_word;
+				//char letter;
+		};
+		
     public:
         Dictionary();
-        virtual ~Dictionary();
+        ~Dictionary();
         void addWord(std::string word);
-        bool isWordPublic(std::string word);
-        bool isPrefixPublic(std::string word);
+        bool isWord(std::string word);
+        bool isPrefix(std::string word);
         Node* getRoot();
+    
 
-    protected:
     private:
-        bool isWord(Node* root, std::string word);
-        bool isPrefix(Node* root, std::string word);
-        Node* root;
+		int charToInt(char c);
+		Node* root;
 };
 
 #endif // PREFIXDICTIONARY_H

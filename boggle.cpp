@@ -134,20 +134,19 @@ void Boggle::FindWords(Tile* prev, int i, int j)
 	tile->i = i;
 	tile->j = j;
 	tile->prev = prev;
-	
 
 	string candidate = BuildWord(tile);
-
-
+	//cout<<candidate<<endl;
+	
 	if(prev != NULL and prev->prev != NULL)	// more than two letters
 	{
-		if(english->isWordPublic(candidate))
+		if(english->isWord(candidate))
 		{
 			words.push_back(candidate);
 		}
 	}
 
-	if(english->isPrefixPublic(candidate))
+	if(english->isPrefix(candidate))
 	{
 		int delta [3] = {-1, 0, 1};
 		
@@ -171,5 +170,8 @@ void Boggle::FindWords(Tile* prev, int i, int j)
 		return;
 	}
 }
+
+
+	
 
 

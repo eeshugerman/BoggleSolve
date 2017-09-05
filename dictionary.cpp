@@ -4,9 +4,28 @@
 
 using namespace std;
 
+Dictionary::Node::Node()
+{
+	parent = NULL;
+	is_word = false;
+	for (int i = 0; i < 26; i++)
+	{
+		children[i] = NULL;
+	}
+}
+
+Dictionary::Node::~Node()
+{
+	for (int i = 0; i < 26; i++)
+	{
+		delete children[i];
+		children[i] = NULL;
+	}
+}
+
 Dictionary::Dictionary()
 {
-    root = NULL;
+    root = new Node;
 }
 
 Dictionary::~Dictionary()
@@ -14,120 +33,77 @@ Dictionary::~Dictionary()
     delete root;
 }
 
+int Dictionary::charToInt(char c)
+{
+	int x = c - 'a';
+	return x;
+}
+
 void Dictionary::addWord(string word)
 {
-    Node* z = new Node;
-    z->word = word;
-    z->l = NULL;
-    z->r = NULL;
-
-    Node* x = root;
-    Node* parent = NULL;
-
-    if (root == NULL)
-    {
-        root = z;
-        root->parent = NULL;
-    }
-    else
-    {
-        while(x != NULL)
-        {
-            parent = x;
-            if(word.compare(x->word) < 0)
-            {
-                x = x->l;
-            }
-            else
-            {
-                x = x->r;
-            }
-        }
-
-        z->parent = parent;
-        if(word.compare(parent->word) < 0)
-        {
-            parent->l = z;
-        }
-        else
-        {
-            parent->r = z;
-        }
-    }
-}
-
-bool Dictionary::isPrefixPublic(string word)
-{
-    return isPrefix(root,word);
-}
-
-bool Dictionary::isPrefix(Node* subTree, string word)
-{
-    if (subTree == NULL)
-    {
-        return false;
-    }
-
-    if(word.length() < subTree->word.length())
-    {
-        string nodePrefix = subTree->word.substr(0,word.length());
-        if(nodePrefix == word)
-        {
-            return true;
-        }
-    }
-
-    if(word.compare(subTree->word) < 0)
-    {
-        return isPrefix(subTree->l, word);
-    }
-
-    else if(word.compare(subTree->word) > 0)
-    {
-        return isPrefix(subTree->r, word);
-    }
-    
-    else
-    {
-		if(subTree->l == NULL and subTree->r == NULL)
+	Node* node = root;
+	for (int i = 0; i < (int)word.length(); i++)
+	{
+		char letter = word[i];
+		int child_idx = charToInt(letter);
+		if (node->children[child_idx])
 		{
-			return false;
+			node = node->children[child_idx];
 		}
 		else
 		{
+			Node* new_node = new Node;
+			node->children[child_idx] = new_node;
+			new_node->parent = node;
+			//new_node->letter = letter;
+			node = new_node;
+		}
+	}
+	node->is_word = true;
+}
+
+
+bool Dictionary::isPrefix(string word)
+{
+	Node* node = root;
+	
+	for (int i = 0; i < (int)word.length(); i++)
+	{
+		char c = word[i];
+		int x = charToInt(c);
+		node = node->children[x];
+		if (node == NULL)
+		{
+			return false;
+		}
+	}
+	for (int x = 0; x < 26; x++)
+	{
+		if (node->children[x])
+		{
 			return true;
 		}
-    }
+	}
+	return false;
 }
 
-bool Dictionary::isWordPublic(string word)
-{
-    return isWord(root, word);
-}
 
-bool Dictionary::isWord(Node* subTree, string word)
+bool Dictionary::isWord(string word)
 {
-	if (word == "dun")
+	Node* node = root;
+	
+	for (int i = 0; i < (int)word.length(); i++)
 	{
-		cout<<"hi"<<endl;
+		char c = word[i];
+		int x = charToInt(c);
+		node = node->children[x];
+		if (node == NULL)
+		{
+			return false;
+		}
 	}
-    if (subTree == NULL)
-    {
-        return false;
-    }
 
-    if(word.compare(subTree->word) < 0)
-    {
-        return isWord(subTree->l, word);
-    }
-
-    else if(word.compare(subTree->word) > 0)
-    {
-        return isWord(subTree->r, word);
-    }
-    
-    else 
-    {
-		return true;
-	}
+	return node->is_word;
 }
+
+
