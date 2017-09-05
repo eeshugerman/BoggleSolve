@@ -1,6 +1,7 @@
 #include "dictionary.h"
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -19,18 +20,27 @@ Dictionary::Node::~Node()
 	for (int i = 0; i < 26; i++)
 	{
 		delete children[i];
-		children[i] = NULL;
 	}
 }
 
 Dictionary::Dictionary()
 {
     root = new Node;
+    ifstream words("english_words.txt");
+    string line;
+    while(getline(words,line))
+    {
+        if(line.length() > 2 and line.length() < 17)
+        {
+            addWord(line);
+        }
+    }
+    words.close();
 }
 
 Dictionary::~Dictionary()
 {
-    delete root;
+	delete root;
 }
 
 int Dictionary::charToInt(char c)
@@ -55,7 +65,6 @@ void Dictionary::addWord(string word)
 			Node* new_node = new Node;
 			node->children[child_idx] = new_node;
 			new_node->parent = node;
-			//new_node->letter = letter;
 			node = new_node;
 		}
 	}
@@ -85,7 +94,6 @@ bool Dictionary::isPrefix(string word)
 			return true;
 		}
 	}
-	
 	return false;
 }
 

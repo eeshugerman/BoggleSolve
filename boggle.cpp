@@ -9,14 +9,15 @@
 
 using namespace std;
 
-Boggle::Boggle(Dictionary* dictionary)
+Boggle::Boggle(Dictionary* dict)
 {
-    english = dictionary;
+    dictionary = dict;
 }
 
 Boggle::~Boggle()
 {
-    //dtor
+	//delete board;
+    //delete words;
 }
 
 void Boggle::FillBoardUser(vector<char> letters)
@@ -140,13 +141,13 @@ void Boggle::FindWords(Tile* prev, int i, int j)
 
 	if(prev != NULL and prev->prev != NULL)	// more than two letters
 	{
-		if(english->isWord(candidate))
+		if(dictionary->isWord(candidate))
 		{
 			words.push_back(candidate);
 		}
 	}
 
-	if(english->isPrefix(candidate))
+	if(dictionary->isPrefix(candidate))
 	{
 		int delta [3] = {-1, 0, 1};
 		

@@ -1,14 +1,14 @@
 #ifndef PREFIXDICTIONARY_H
 #define PREFIXDICTIONARY_H
 #include <string>
-
-
+#include <iostream>
 
 
 class Dictionary	    // as a trie, aka prefix tree 
 {
-	private:
-		class Node
+
+    private:
+    	class Node
 		{
 			public:
 				Node();
@@ -16,21 +16,30 @@ class Dictionary	    // as a trie, aka prefix tree
 				Node* parent;
 				Node* children[26];
 				bool is_word;
-				//char letter;
+				//Node(const Node &obj);
+				//{
+					//std::cout<<"copy constructor called" << std::endl;
+				//};
+
+				//Node& operator=(const Node& obj)
+				//{
+					//std::cout<<"copy assignment operator called" << std::endl;
+				//};
 		};
-		
-    public:
+		int charToInt(char c);
+		Node* root;
+	
+	public:
         Dictionary();
         ~Dictionary();
         void addWord(std::string word);
         bool isWord(std::string word);
         bool isPrefix(std::string word);
-        Node* getRoot();
-    
+        
 
-    private:
-		int charToInt(char c);
-		Node* root;
+		
+		
+    
 };
 
 #endif // PREFIXDICTIONARY_H

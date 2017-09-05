@@ -8,18 +8,8 @@ using namespace std;
 int main()
 {
     Dictionary english;
-
-    ifstream words("english_words.txt");
-    string line;
-    while(getline(words,line))
-    {
-        if(line.length() > 2 and  line.length() < 17)
-        {
-            english.addWord(line);
-        }
-    }
-
     Boggle boggle(&english);
+    
     boggle.FillBoardRandom();
 
     int choice;
@@ -33,7 +23,7 @@ int main()
         cout<<"3. Print board"		<<endl;
         cout<<"4. Print possible words"	<<endl;
         cout<<"5. Quit"			<<endl;
-        //cout<<"6. Read board from file"<<endl;
+        //cout<<"6. Load test board"<<endl;
 
 
         cin >> choice;
@@ -52,7 +42,10 @@ int main()
 
         else if(choice == 2)
         {
-            cout<<"Please enter one row (4 letters, no spaces) at a time, each followed by the enter key."<<endl;
+            cout << "Please enter one row at a time (4 letters, no " 
+				  "spaces, lowercase), each followed by the enter key." 
+				  <<endl;
+				  
             vector<char> letters;
             for(int i = 0; i < 4; i++)
             {
@@ -93,27 +86,27 @@ int main()
         else if (choice == 5)
         {
             cout<<"Goodbye!"<<endl;
-            break;
+            return 0;
         }
         
-        else if (choice == 6)
-        {
-			ifstream inFile;
-			inFile.open("test_board.txt");
-            vector<char> letters;
-			char row[4];
-			while (inFile >> row)
-			{
-				for(int i = 0; i < 4; i++)
-				{
-					letters.push_back(row[i]);
-				}
-			}	
-			cout<<endl;
-            boggle.FillBoardUser(letters);
-            boggle.PrintBoard();
-				
-		}
+        //else if (choice == 6)
+        //{
+			//ifstream inFile;
+			//inFile.open("test_board.txt");
+            //vector<char> letters;
+			//char row[4];
+			//while (inFile >> row)
+			//{
+				//for(int i = 0; i < 4; i++)
+				//{
+					//letters.push_back(row[i]);
+				//}
+			//}	
+			//cout<<endl;
+			//inFile.close();
+            //boggle.FillBoardUser(letters);
+            //boggle.PrintBoard();	
+		//}
 	
 		else
 		{
