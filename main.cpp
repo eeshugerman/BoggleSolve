@@ -6,12 +6,71 @@
 
 using namespace std;
 
+
+void CustomBoard(Boggle* game)
+{
+	cout << "Please enter one row at a time (4 letters, no spaces, "
+			"lowercase), each followed by the enter key." 
+	<< endl;
+		  
+	vector<char> letters;
+	for(int i = 0; i < 4; i++)
+	{
+		char row[4];
+		cin >> row;
+		
+		for(int i = 0; i < 4; i++)
+		{
+			letters.push_back(row[i]);
+		}
+	}
+	cout<<endl;
+	game->FillBoardUser(letters);
+	game->PrintBoard();
+}
+
+void Solve(Boggle* game)
+{
+	game->ClearWords();
+
+	for(int i = 0; i < 4; i++)
+	{
+		for(int j = 0; j < 4; j++)
+		{
+			game->FindWords(NULL, i,j);
+		}
+	}
+	cout<<endl;
+	game->PrintBoard();
+	cout<<endl;
+	game->PrintWords();
+}
+
+void LoadTestBoard(Boggle* game)
+{
+	ifstream inFile;
+	inFile.open("test_board.txt");
+	vector<char> letters;
+	char row[4];
+	while (inFile >> row)
+	{
+		for(int i = 0; i < 4; i++)
+		{
+			letters.push_back(row[i]);
+		}
+	}	
+	cout<<endl;
+	inFile.close();
+	game->FillBoardUser(letters);
+	game->PrintBoard();
+}
+
 int main()
 {
     Dictionary english;
-    Boggle boggle(&english);
+    Boggle game(&english);
     
-    boggle.FillBoardRandom();
+    game.FillBoardRandom();
 
     int choice;
     while(true)    
@@ -37,78 +96,34 @@ int main()
 
         if(choice == 1)
         {
-            boggle.FillBoardRandom();
-            boggle.PrintBoard();
-        }
-
+			game.FillBoardRandom();
+			game.PrintBoard();        
+		}
         else if(choice == 2)
         {
-            cout << "Please enter one row at a time (4 letters, no " 
-				  "spaces, lowercase), each followed by the enter key." 
-				  <<endl;
-				  
-            vector<char> letters;
-            for(int i = 0; i < 4; i++)
-            {
-                char row[4];
-                cin >> row;
-                
-				for(int i = 0; i < 4; i++)
-				{
-					letters.push_back(row[i]);
-				}
-			}
-            cout<<endl;
-            boggle.FillBoardUser(letters);
-            boggle.PrintBoard();
+			CustomBoard(&game);
         }
-
         else if(choice == 3)
         {
-            boggle.PrintBoard();
+            game.PrintBoard();
         }
-
         else if(choice == 4)
         {
-            for(int i = 0; i < 4; i++)
-            {
-                for(int j = 0; j < 4; j++)
-                {
-                    boggle.FindWords(NULL, i,j);
-                }
-            }
-            cout<<endl;
-            boggle.PrintBoard();
-            cout<<endl;
-            boggle.PrintWords();
-            boggle.ClearWords();
+			Solve(&game);
         }
-
         else if (choice == 5)
         {
             cout<<"Goodbye!"<<endl;
             return 0;
         }
-        
         else if (choice == 6)
         {
-			ifstream inFile;
-			inFile.open("test_board.txt");
-            vector<char> letters;
-			char row[4];
-			while (inFile >> row)
-			{
-				for(int i = 0; i < 4; i++)
-				{
-					letters.push_back(row[i]);
-				}
-			}	
-			cout<<endl;
-			inFile.close();
-            boggle.FillBoardUser(letters);
-            boggle.PrintBoard();	
+			LoadTestBoard(&game);
 		}
-	
+		else if (choice == 7)
+		{
+			game.SaveWords();
+		}
 		else
 		{
 			cout<<"Invalid option, please try again."<<endl;
