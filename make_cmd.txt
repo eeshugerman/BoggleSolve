@@ -1,1 +1,0 @@
-g++ main.cpp dictionary.cpp boggle.cpp -g -Wall -o BoggleSolve
