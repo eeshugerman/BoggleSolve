@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-fwd
-=======
 dug
 dun
 dune
@@ -29,4 +26,3 @@ went
 wry
 yen
 yew
->>>>>>> clean_up
