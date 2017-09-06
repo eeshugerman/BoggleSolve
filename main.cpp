@@ -28,12 +28,12 @@ int main()
 
 
         cin >> choice;
-	if (cin.fail())
-	{
-	    cin.clear();
-	    cin.ignore(10000, '\n');
-	    choice = 0;
-	}
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(10000, '\n');
+			choice = 0;
+		}
 
         if(choice == 1)
         {
@@ -90,24 +90,24 @@ int main()
             return 0;
         }
         
-        //else if (choice == 6)
-        //{
-			//ifstream inFile;
-			//inFile.open("test_board.txt");
-            //vector<char> letters;
-			//char row[4];
-			//while (inFile >> row)
-			//{
-				//for(int i = 0; i < 4; i++)
-				//{
-					//letters.push_back(row[i]);
-				//}
-			//}	
-			//cout<<endl;
-			//inFile.close();
-            //boggle.FillBoardUser(letters);
-            //boggle.PrintBoard();	
-		//}
+        else if (choice == 6)
+        {
+			ifstream inFile;
+			inFile.open("test_board.txt");
+            vector<char> letters;
+			char row[4];
+			while (inFile >> row)
+			{
+				for(int i = 0; i < 4; i++)
+				{
+					letters.push_back(row[i]);
+				}
+			}	
+			cout<<endl;
+			inFile.close();
+            boggle.FillBoardUser(letters);
+            boggle.PrintBoard();	
+		}
 	
 		else
 		{

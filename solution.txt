@@ -1,7 +1,1 @@
-app
-jap
-mkt
-pax
-rcpt
-tpk
-wpm
+fwd
