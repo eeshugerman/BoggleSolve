@@ -25,6 +25,7 @@ class Boggle
         void PrintBoard();
         void FindWords(Tile* prev, int i, int j);
         void PrintWords();
+        void SaveWords();
         void ClearWords();
 
     private:
