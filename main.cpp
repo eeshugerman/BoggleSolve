@@ -6,12 +6,8 @@
 
 using namespace std;
 
-void RandomBoard(Boggle game)
-{
 
-}
-
-void CustomBoard(Boggle game)
+void CustomBoard(Boggle* game)
 {
 	cout << "Please enter one row at a time (4 letters, no spaces, "
 			"lowercase), each followed by the enter key." 
@@ -29,28 +25,28 @@ void CustomBoard(Boggle game)
 		}
 	}
 	cout<<endl;
-	game.FillBoardUser(letters);
-	game.PrintBoard();
+	game->FillBoardUser(letters);
+	game->PrintBoard();
 }
 
-void Solve(Boggle game)
+void Solve(Boggle* game)
 {
-	game.ClearWords();
+	game->ClearWords();
 
 	for(int i = 0; i < 4; i++)
 	{
 		for(int j = 0; j < 4; j++)
 		{
-			game.FindWords(NULL, i,j);
+			game->FindWords(NULL, i,j);
 		}
 	}
 	cout<<endl;
-	game.PrintBoard();
+	game->PrintBoard();
 	cout<<endl;
-	game.PrintWords();
+	game->PrintWords();
 }
 
-void LoadTestBoard(Boggle game)
+void LoadTestBoard(Boggle* game)
 {
 	ifstream inFile;
 	inFile.open("test_board.txt");
@@ -65,8 +61,8 @@ void LoadTestBoard(Boggle game)
 	}	
 	cout<<endl;
 	inFile.close();
-	game.FillBoardUser(letters);
-	game.PrintBoard();
+	game->FillBoardUser(letters);
+	game->PrintBoard();
 }
 
 int main()
@@ -105,7 +101,7 @@ int main()
 		}
         else if(choice == 2)
         {
-			CustomBoard(game);
+			CustomBoard(&game);
         }
         else if(choice == 3)
         {
@@ -113,7 +109,7 @@ int main()
         }
         else if(choice == 4)
         {
-			Solve(game);
+			Solve(&game);
         }
         else if (choice == 5)
         {
@@ -122,7 +118,7 @@ int main()
         }
         else if (choice == 6)
         {
-			LoadTestBoard(game);
+			LoadTestBoard(&game);
 		}
 		else if (choice == 7)
 		{
