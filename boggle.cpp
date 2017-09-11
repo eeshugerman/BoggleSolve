@@ -12,6 +12,13 @@ using namespace std;
 Boggle::Boggle(Dictionary* dict)
 {
     dictionary = dict;
+    for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			board[i][j] = NULL;
+		}
+	}
 }
 
 Boggle::~Boggle()
@@ -33,6 +40,17 @@ Boggle::~Boggle()
 
 void Boggle::FillBoardUser(vector<char> letters)
 {
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			if(board[i][j] != NULL)
+			{
+				delete board[i][j];
+			}		
+		}
+	}
+	
     int k = 0;
     for(int i = 0; i < 4; i++)
     {
@@ -51,6 +69,17 @@ void Boggle::FillBoardUser(vector<char> letters)
 
 void Boggle::FillBoardRandom()
 {
+
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			if(board[i][j] != NULL)
+			{
+				delete board[i][j];
+			}
+		}
+	}
     unsigned seed = chrono::system_clock::now().time_since_epoch().count();
     uniform_int_distribution<int> distribution(0,25);
     default_random_engine generator(seed);

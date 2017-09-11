@@ -32,4 +32,5 @@ make
 + Checks on user input should be added for option (2) "New custom board". As of now, only lowercase letters will give correct behavior, but other charectors are not rejected.
 
 
-
+## Demo
+[valgrind demo](tty.gif "")
