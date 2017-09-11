@@ -33,4 +33,4 @@ make
 
 
 ## Demo
-[valgrind demo](tty.gif "")
+![valgrind demo](tty.gif "")
