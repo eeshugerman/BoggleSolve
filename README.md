@@ -8,14 +8,14 @@ Boggle is played with a 4x4 grid of tiles, where each tile is printed with a let
 
 For each tile on the board, a tree is constructed with that tile as its root. The trees are constructed recursively, in the following manner:
 
-A tile ***t<sub>1</sub>*** adjacent to tile ***t<sub>0</sub>*** is added as a child node to ***t<sub>0</sub>*** if:  
+A tile *t<sub>1</sub>* adjacent to tile *t<sub>0</sub>* is added as a child node to *t<sub>0</sub>* if:  
 
-+ ***t<sub>1</sub>*** is not already present in the tree as an ancestor of ***t<sub>0</sub>***, and
-+ ***s*** is the beginning of a word (a prefix), or is a word, where ***s*** is the string formed by prepending ***t<sub>1</sub>***, ***t<sub>0</sub>***, and all ancestors of ***t<sub>0</sub>***, sequentially.
++ *t<sub>1</sub>* is not already present in the tree as an ancestor of *t<sub>0</sub>*, and
++ *s* is the beginning of a word (a prefix), or is a word, where *s* is the string formed by prepending *t<sub>1</sub>*, *t<sub>0</sub>*, and all ancestors of *t<sub>0</sub>*, sequentially.
 
-If ***s*** is a word, it is added to the solution set.
+If *s* is a word, it is added to the solution set.
 
-To check if ***s*** is a prefix or a word, a dictionary is needed. The dictionary is implemented as a [trie](https://en.wikipedia.org/wiki/Tree_(data_structure) "Wikipedia"), which is optimal for checking if a string is a prefix. In this case, each node of the trie holds a flag indicating if its key is a full english word.
+To check if *s* is a prefix or a word, a dictionary is needed. The dictionary is implemented as a [trie](https://en.wikipedia.org/wiki/Tree_(data_structure) "Wikipedia"), which is optimal for checking if a string is a prefix. In this case, each node of the trie holds a flag indicating if its key is a full english word.
 
 
 ## Usage
