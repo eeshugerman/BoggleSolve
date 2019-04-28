@@ -1,4 +1,2 @@
-solution.txt
-ref_solution.txt
 *.o
-a.out
+BoggleSolve
