@@ -13,6 +13,8 @@ struct Tile {
 
 class Boggle {
 private:
+  static const int BOARD_SIZE = 4;
+
   std::string buildWord(Tile *prevPath);
   bool checkVisited(Tile *toCheck, Tile *current);
   void removeDuplicateWords();
@@ -20,7 +22,7 @@ private:
   Dictionary *dictionary;
   Tile *board[4][4];
   std::vector<std::string> words;
-  std::vector<Tile *> searchTiles;
+  std::vector<Tile*> searchTiles;
 
 public:
   Boggle(Dictionary *dict);

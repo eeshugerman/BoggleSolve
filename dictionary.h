@@ -3,17 +3,22 @@
 #include <iostream>
 #include <string>
 
+# define ALPHABET_SIZE 26
+
 class Node {
 public:
   Node();
   ~Node();
   Node *parent;
-  Node *children[26];
+  Node *children[ALPHABET_SIZE];
   bool isWord;
 };
 
 class Dictionary { // as a trie, aka prefix tree
 private:
+  static const unsigned MIN_WORD_LENGTH = 3;
+  static const unsigned MAX_WORD_LENGTH = 16;
+
   int charToInt(char c);
   Node *root;
 

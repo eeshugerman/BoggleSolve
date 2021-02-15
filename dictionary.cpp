@@ -8,13 +8,13 @@ using namespace std;
 Node::Node() {
   parent = NULL;
   isWord = false;
-  for (int i = 0; i < 26; i++) {
+  for (int i = 0; i < ALPHABET_SIZE; i++) {
     children[i] = NULL;
   }
 }
 
 Node::~Node() {
-  for (int i = 0; i < 26; i++) {
+  for (int i = 0; i < ALPHABET_SIZE; i++) {
     delete children[i];
   }
 }
@@ -24,7 +24,8 @@ Dictionary::Dictionary() {
   ifstream words("english_words.txt");
   string line;
   while (getline(words, line)) {
-    if (line.length() > 2 and line.length() < 17) {
+    const unsigned wordLength = line.length();
+    if (MIN_WORD_LENGTH <= wordLength and wordLength <= MAX_WORD_LENGTH) {
       addWord(line);
     }
   }
@@ -68,7 +69,7 @@ bool Dictionary::isPrefix(string word) {
     }
   }
 
-  for (int x = 0; x < 26; x++) {
+  for (int x = 0; x < ALPHABET_SIZE; x++) {
     if (node->children[x]) {
       return true;
     }

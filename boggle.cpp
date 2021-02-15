@@ -1,4 +1,5 @@
 #include "boggle.h"
+#include "dictionary.h"
 #include <algorithm>
 #include <chrono>
 #include <fstream>
@@ -11,16 +12,16 @@ using namespace std;
 
 Boggle::Boggle(Dictionary *dict) {
   dictionary = dict;
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
+  for (int i = 0; i < BOARD_SIZE; i++) {
+    for (int j = 0; j < BOARD_SIZE; j++) {
       board[i][j] = NULL;
     }
   }
 }
 
 Boggle::~Boggle() {
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
+  for (int i = 0; i < BOARD_SIZE; i++) {
+    for (int j = 0; j < BOARD_SIZE; j++) {
       delete board[i][j];
     }
   }
@@ -31,8 +32,8 @@ Boggle::~Boggle() {
 }
 
 void Boggle::fillBoardUser(vector<char> letters) {
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
+  for (int i = 0; i < BOARD_SIZE; i++) {
+    for (int j = 0; j < BOARD_SIZE; j++) {
       if (board[i][j] != NULL) {
         delete board[i][j];
       }
@@ -40,8 +41,8 @@ void Boggle::fillBoardUser(vector<char> letters) {
   }
 
   int k = 0;
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
+  for (int i = 0; i < BOARD_SIZE; i++) {
+    for (int j = 0; j < BOARD_SIZE; j++) {
       Tile *tile = new Tile;
       tile->letter = letters[k];
       tile->prev = NULL;
@@ -55,19 +56,19 @@ void Boggle::fillBoardUser(vector<char> letters) {
 
 void Boggle::fillBoardRandom() {
 
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
+  for (int i = 0; i < BOARD_SIZE; i++) {
+    for (int j = 0; j < BOARD_SIZE; j++) {
       if (board[i][j] != NULL) {
         delete board[i][j];
       }
     }
   }
   unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-  uniform_int_distribution<int> distribution(0, 25);
+  uniform_int_distribution<int> distribution(0, ALPHABET_SIZE - 1);
   default_random_engine generator(seed);
 
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
+  for (int i = 0; i < BOARD_SIZE; i++) {
+    for (int j = 0; j < BOARD_SIZE; j++) {
       int randInt = distribution(generator);
       char randChar = 'a' + randInt;
 
@@ -83,8 +84,8 @@ void Boggle::fillBoardRandom() {
 }
 
 void Boggle::printBoard() {
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
+  for (int i = 0; i < BOARD_SIZE; i++) {
+    for (int j = 0; j < BOARD_SIZE; j++) {
       cout << board[i][j]->letter << " ";
     }
     cout << endl;
@@ -164,7 +165,8 @@ void Boggle::findWords(Tile *prev, int i, int j) {
         int iNext = i + iStep;
         int jNext = j + jStep;
 
-        if (iNext >= 0 and iNext < 4 and jNext >= 0 and jNext < 4) {
+        if ((0 <= iNext and iNext < BOARD_SIZE) and
+            (0 <= jNext and jNext < BOARD_SIZE)) {
           findWords(tile, iNext, jNext);
         }
       }
