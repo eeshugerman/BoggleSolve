@@ -22,7 +22,6 @@ private:
   Dictionary *dictionary;
   Tile *board[4][4];
   std::vector<std::string> words;
-  std::vector<Tile*> searchTiles;
 
 public:
   Boggle(Dictionary *dict);

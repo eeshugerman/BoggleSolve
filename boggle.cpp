@@ -25,10 +25,6 @@ Boggle::~Boggle() {
       delete board[i][j];
     }
   }
-
-  for (unsigned i = 0; i < searchTiles.size(); i++) {
-    delete searchTiles[i];
-  }
 }
 
 void Boggle::fillBoardUser(vector<char> letters) {
@@ -152,8 +148,6 @@ void Boggle::findWords(Tile *prev, int i, int j) {
     .i = i,
     .j = j,
   };
-
-  searchTiles.push_back(tile);
 
   string candidate = buildWord(tile);
 
