@@ -80,24 +80,32 @@ int main() {
       choice = 0;
     }
 
-    if (choice == 1) {
-      game.fillBoardRandom();
-      game.printBoard();
-    } else if (choice == 2) {
-      CustomBoard(&game);
-    } else if (choice == 3) {
-      game.printBoard();
-    } else if (choice == 4) {
-      Solve(&game);
-    } else if (choice == 5) {
-      cout << "Goodbye!" << endl;
-      return 0;
-    } else if (choice == 6) {
-      LoadTestBoard(&game);
-    } else if (choice == 7) {
-      game.saveWords();
-    } else {
-      cout << "Invalid option, please try again." << endl;
-    }
+    switch(choice) {
+      case 1:
+        game.fillBoardRandom();
+        game.printBoard();
+        break;
+      case 2:
+        CustomBoard(&game);
+        break;
+      case 3:
+        game.printBoard();
+        break;
+      case 4:
+        Solve(&game);
+        break;
+      case 5:
+        cout << "Goodbye!" << endl;
+        return 0;
+      case 6:
+        LoadTestBoard(&game);
+        break;
+      case 7:
+        game.saveWords();
+        break;
+      default:
+        cout << "Invalid option, please try again." << endl;
+        break;
+      }
   }
 }

@@ -45,7 +45,8 @@ void Dictionary::addWord(string word) {
     int childIdx = charToInt(letter);
     if (node->children[childIdx]) {
       node = node->children[childIdx];
-    } else {
+    }
+    else {
       Node *childNode = new Node;
       node->children[childIdx] = childNode;
       childNode->parent = node;
