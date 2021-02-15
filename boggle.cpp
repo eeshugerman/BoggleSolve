@@ -30,7 +30,7 @@ Boggle::~Boggle() {
   }
 }
 
-void Boggle::FillBoardUser(vector<char> letters) {
+void Boggle::fillBoardUser(vector<char> letters) {
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
       if (board[i][j] != NULL) {
@@ -53,7 +53,7 @@ void Boggle::FillBoardUser(vector<char> letters) {
   }
 }
 
-void Boggle::FillBoardRandom() {
+void Boggle::fillBoardRandom() {
 
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
@@ -82,7 +82,7 @@ void Boggle::FillBoardRandom() {
   }
 }
 
-void Boggle::PrintBoard() {
+void Boggle::printBoard() {
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
       cout << board[i][j]->letter << " ";
@@ -91,7 +91,7 @@ void Boggle::PrintBoard() {
   }
 }
 
-bool Boggle::CheckVisited(Tile *to_check, Tile *path) {
+bool Boggle::checkVisited(Tile *to_check, Tile *path) {
   while (path) {
     if (path->i == to_check->i and path->j == to_check->j) {
       return true;
@@ -101,7 +101,7 @@ bool Boggle::CheckVisited(Tile *to_check, Tile *path) {
   return false;
 }
 
-std::string Boggle::BuildWord(Tile *path) {
+std::string Boggle::buildWord(Tile *path) {
   vector<char> wordV;
   while (path != NULL) {
     wordV.push_back(path->letter);
@@ -112,23 +112,23 @@ std::string Boggle::BuildWord(Tile *path) {
   return word;
 }
 
-void Boggle::ClearWords() { words.clear(); }
+void Boggle::clearWords() { words.clear(); }
 
-void Boggle::RemoveDuplicateWords() {
+void Boggle::removeDuplicateWords() {
   sort(words.begin(), words.end());
   words.erase(unique(words.begin(), words.end()), words.end());
 }
 
-void Boggle::PrintWords() {
-  RemoveDuplicateWords();
+void Boggle::printWords() {
+  removeDuplicateWords();
 
   for (int i = 0; i < (int)words.size(); i++) {
     cout << words[i] << endl;
   }
 }
 
-void Boggle::SaveWords() {
-  RemoveDuplicateWords();
+void Boggle::saveWords() {
+  removeDuplicateWords();
 
   ofstream outFile("solution.txt");
 
@@ -137,8 +137,8 @@ void Boggle::SaveWords() {
   }
 }
 
-void Boggle::FindWords(Tile *prev, int i, int j) {
-  if (CheckVisited(board[i][j], prev)) {
+void Boggle::findWords(Tile *prev, int i, int j) {
+  if (checkVisited(board[i][j], prev)) {
     return;
   }
 
@@ -150,7 +150,7 @@ void Boggle::FindWords(Tile *prev, int i, int j) {
 
   search_tiles.push_back(tile);
 
-  string candidate = BuildWord(tile);
+  string candidate = buildWord(tile);
 
   if (prev != NULL and prev->prev != NULL) // more than two letters
   {
@@ -168,7 +168,7 @@ void Boggle::FindWords(Tile *prev, int i, int j) {
         int j_next = j + delta[del_j_idx];
 
         if (i_next >= 0 and i_next < 4 and j_next >= 0 and j_next < 4) {
-          FindWords(tile, i_next, j_next);
+          findWords(tile, i_next, j_next);
         }
       }
     }

@@ -21,22 +21,22 @@ void CustomBoard(Boggle *game) {
     }
   }
   cout << endl;
-  game->FillBoardUser(letters);
-  game->PrintBoard();
+  game->fillBoardUser(letters);
+  game->printBoard();
 }
 
 void Solve(Boggle *game) {
-  game->ClearWords();
+  game->clearWords();
 
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
-      game->FindWords(NULL, i, j);
+      game->findWords(NULL, i, j);
     }
   }
   cout << endl;
-  game->PrintBoard();
+  game->printBoard();
   cout << endl;
-  game->PrintWords();
+  game->printWords();
 }
 
 void LoadTestBoard(Boggle *game) {
@@ -51,15 +51,15 @@ void LoadTestBoard(Boggle *game) {
   }
   cout << endl;
   inFile.close();
-  game->FillBoardUser(letters);
-  game->PrintBoard();
+  game->fillBoardUser(letters);
+  game->printBoard();
 }
 
 int main() {
   Dictionary english;
   Boggle game(&english);
 
-  game.FillBoardRandom();
+  game.fillBoardRandom();
 
   int choice;
   while (true) {
@@ -81,12 +81,12 @@ int main() {
     }
 
     if (choice == 1) {
-      game.FillBoardRandom();
-      game.PrintBoard();
+      game.fillBoardRandom();
+      game.printBoard();
     } else if (choice == 2) {
       CustomBoard(&game);
     } else if (choice == 3) {
-      game.PrintBoard();
+      game.printBoard();
     } else if (choice == 4) {
       Solve(&game);
     } else if (choice == 5) {
@@ -95,7 +95,7 @@ int main() {
     } else if (choice == 6) {
       LoadTestBoard(&game);
     } else if (choice == 7) {
-      game.SaveWords();
+      game.saveWords();
     } else {
       cout << "Invalid option, please try again." << endl;
     }

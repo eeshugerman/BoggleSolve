@@ -15,18 +15,18 @@ class Boggle {
 public:
   Boggle(Dictionary *dict);
   ~Boggle();
-  void FillBoardRandom();
-  void FillBoardUser(std::vector<char> letters);
-  void PrintBoard();
-  void FindWords(Tile *prev, int i, int j);
-  void PrintWords();
-  void SaveWords();
-  void ClearWords();
+  void fillBoardRandom();
+  void fillBoardUser(std::vector<char> letters);
+  void printBoard();
+  void findWords(Tile *prev, int i, int j);
+  void printWords();
+  void saveWords();
+  void clearWords();
 
 private:
-  std::string BuildWord(Tile *prev_path);
-  bool CheckVisited(Tile *to_check, Tile *current);
-  void RemoveDuplicateWords();
+  std::string buildWord(Tile *prev_path);
+  bool checkVisited(Tile *to_check, Tile *current);
+  void removeDuplicateWords();
 
   Dictionary *dictionary;
   Tile *board[4][4];
