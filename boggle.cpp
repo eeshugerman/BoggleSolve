@@ -25,8 +25,8 @@ Boggle::~Boggle() {
     }
   }
 
-  for (unsigned i = 0; i < search_tiles.size(); i++) {
-    delete search_tiles[i];
+  for (unsigned i = 0; i < searchTiles.size(); i++) {
+    delete searchTiles[i];
   }
 }
 
@@ -68,11 +68,11 @@ void Boggle::fillBoardRandom() {
 
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
-      int rand_int = distribution(generator);
-      char rand_char = 'a' + rand_int;
+      int randInt = distribution(generator);
+      char randChar = 'a' + randInt;
 
       Tile *tile = new Tile;
-      tile->letter = rand_char;
+      tile->letter = randChar;
       tile->prev = NULL;
       tile->i = i;
       tile->j = j;
@@ -91,9 +91,9 @@ void Boggle::printBoard() {
   }
 }
 
-bool Boggle::checkVisited(Tile *to_check, Tile *path) {
+bool Boggle::checkVisited(Tile *toCheck, Tile *path) {
   while (path) {
-    if (path->i == to_check->i and path->j == to_check->j) {
+    if (path->i == toCheck->i and path->j == toCheck->j) {
       return true;
     }
     path = path->prev;
@@ -148,27 +148,24 @@ void Boggle::findWords(Tile *prev, int i, int j) {
   tile->j = j;
   tile->prev = prev;
 
-  search_tiles.push_back(tile);
+  searchTiles.push_back(tile);
 
   string candidate = buildWord(tile);
 
-  if (prev != NULL and prev->prev != NULL) // more than two letters
-  {
+  if (prev != NULL and prev->prev != NULL) { // more than two letters
     if (dictionary->isWord(candidate)) {
       words.push_back(candidate);
     }
   }
 
   if (dictionary->isPrefix(candidate)) {
-    int delta[3] = {-1, 0, 1};
+    for (int iStep = -1; iStep <= 1; iStep++) {
+      for (int jStep = -1; jStep <= 1; jStep++) {
+        int iNext = i + iStep;
+        int jNext = j + jStep;
 
-    for (int del_i_idx = 0; del_i_idx < 4; del_i_idx++) {
-      for (int del_j_idx = 0; del_j_idx < 4; del_j_idx++) {
-        int i_next = i + delta[del_i_idx];
-        int j_next = j + delta[del_j_idx];
-
-        if (i_next >= 0 and i_next < 4 and j_next >= 0 and j_next < 4) {
-          findWords(tile, i_next, j_next);
+        if (iNext >= 0 and iNext < 4 and jNext >= 0 and jNext < 4) {
+          findWords(tile, iNext, jNext);
         }
       }
     }

@@ -9,7 +9,7 @@ class Node {
     ~Node();
     Node *parent;
     Node *children[26];
-    bool is_word;
+    bool isWord;
 };
 
 class Dictionary { // as a trie, aka prefix tree

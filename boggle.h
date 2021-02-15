@@ -24,14 +24,14 @@ class Boggle {
     void clearWords();
 
   private:
-    std::string buildWord(Tile *prev_path);
-    bool checkVisited(Tile *to_check, Tile *current);
+    std::string buildWord(Tile *prevPath);
+    bool checkVisited(Tile *toCheck, Tile *current);
     void removeDuplicateWords();
 
     Dictionary *dictionary;
     Tile *board[4][4];
     std::vector<std::string> words;
-    std::vector<Tile *> search_tiles;
+    std::vector<Tile *> searchTiles;
 };
 
 #endif // GAME_H

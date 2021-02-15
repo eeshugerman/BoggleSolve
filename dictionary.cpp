@@ -5,15 +5,15 @@
 
 using namespace std;
 
-Dictionary::Node::Node() {
+Node::Node() {
   parent = NULL;
-  is_word = false;
+  isWord = false;
   for (int i = 0; i < 26; i++) {
     children[i] = NULL;
   }
 }
 
-Dictionary::Node::~Node() {
+Node::~Node() {
   for (int i = 0; i < 26; i++) {
     delete children[i];
   }
@@ -42,17 +42,17 @@ void Dictionary::addWord(string word) {
   Node *node = root;
   for (int i = 0; i < (int)word.length(); i++) {
     char letter = word[i];
-    int child_idx = charToInt(letter);
-    if (node->children[child_idx]) {
-      node = node->children[child_idx];
+    int childIdx = charToInt(letter);
+    if (node->children[childIdx]) {
+      node = node->children[childIdx];
     } else {
-      Node *new_node = new Node;
-      node->children[child_idx] = new_node;
-      new_node->parent = node;
-      node = new_node;
+      Node *childNode = new Node;
+      node->children[childIdx] = childNode;
+      childNode->parent = node;
+      node = childNode;
     }
   }
-  node->is_word = true;
+  node->isWord = true;
 }
 
 bool Dictionary::isPrefix(string word) {
@@ -87,5 +87,5 @@ bool Dictionary::isWord(string word) {
     }
   }
 
-  return node->is_word;
+  return node->isWord;
 }
