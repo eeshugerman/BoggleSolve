@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void CustomBoard(Boggle *game) {
+void customBoard(Boggle *game) {
   cout << "Please enter one row at a time (4 letters, no spaces, "
           "lowercase), each followed by the enter key."
        << endl;
@@ -25,7 +25,7 @@ void CustomBoard(Boggle *game) {
   game->printBoard();
 }
 
-void Solve(Boggle *game) {
+void solve(Boggle *game) {
   game->clearWords();
 
   for (int i = 0; i < 4; i++) {
@@ -39,7 +39,7 @@ void Solve(Boggle *game) {
   game->printWords();
 }
 
-void LoadTestBoard(Boggle *game) {
+void loadTestBoard(Boggle *game) {
   ifstream inFile;
   inFile.open("test_board.txt");
   vector<char> letters;
@@ -86,19 +86,19 @@ int main() {
         game.printBoard();
         break;
       case 2:
-        CustomBoard(&game);
+        customBoard(&game);
         break;
       case 3:
         game.printBoard();
         break;
       case 4:
-        Solve(&game);
+        solve(&game);
         break;
       case 5:
         cout << "Goodbye!" << endl;
         return 0;
       case 6:
-        LoadTestBoard(&game);
+        loadTestBoard(&game);
         break;
       case 7:
         game.saveWords();
