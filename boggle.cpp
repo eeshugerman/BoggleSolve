@@ -43,11 +43,13 @@ void Boggle::fillBoardUser(vector<char> letters) {
   int k = 0;
   for (int i = 0; i < BOARD_SIZE; i++) {
     for (int j = 0; j < BOARD_SIZE; j++) {
-      Tile *tile = new Tile;
-      tile->letter = letters[k];
-      tile->prev = NULL;
-      tile->i = i;
-      tile->j = j;
+      Tile* tile = new Tile {
+        .letter = letters[k],
+        .prev = NULL,
+        .i = i,
+        .j = j,
+      };
+
       board[i][j] = tile;
       k++;
     }
@@ -72,11 +74,12 @@ void Boggle::fillBoardRandom() {
       int randInt = distribution(generator);
       char randChar = 'a' + randInt;
 
-      Tile *tile = new Tile;
-      tile->letter = randChar;
-      tile->prev = NULL;
-      tile->i = i;
-      tile->j = j;
+      Tile* tile = new Tile {
+        .letter = randChar,
+        .prev = NULL,
+        .i = i,
+        .j = j,
+      };
 
       board[i][j] = tile;
     }
@@ -143,11 +146,12 @@ void Boggle::findWords(Tile *prev, int i, int j) {
     return;
   }
 
-  Tile *tile = new Tile;
-  tile->letter = board[i][j]->letter;
-  tile->i = i;
-  tile->j = j;
-  tile->prev = prev;
+  Tile* tile = new Tile{
+    .letter = board[i][j]->letter,
+    .prev = prev,
+    .i = i,
+    .j = j,
+  };
 
   searchTiles.push_back(tile);
 

@@ -6,7 +6,7 @@
 
 struct Tile {
   char letter;
-  Tile *prev;
+  Tile* prev;
   int i;
   int j;
 };
