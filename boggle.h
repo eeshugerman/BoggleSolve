@@ -12,26 +12,26 @@ struct Tile {
 };
 
 class Boggle {
-  public:
-    Boggle(Dictionary *dict);
-    ~Boggle();
-    void fillBoardRandom();
-    void fillBoardUser(std::vector<char> letters);
-    void printBoard();
-    void findWords(Tile *prev, int i, int j);
-    void printWords();
-    void saveWords();
-    void clearWords();
+private:
+  std::string buildWord(Tile *prevPath);
+  bool checkVisited(Tile *toCheck, Tile *current);
+  void removeDuplicateWords();
 
-  private:
-    std::string buildWord(Tile *prevPath);
-    bool checkVisited(Tile *toCheck, Tile *current);
-    void removeDuplicateWords();
+  Dictionary *dictionary;
+  Tile *board[4][4];
+  std::vector<std::string> words;
+  std::vector<Tile *> searchTiles;
 
-    Dictionary *dictionary;
-    Tile *board[4][4];
-    std::vector<std::string> words;
-    std::vector<Tile *> searchTiles;
+public:
+  Boggle(Dictionary *dict);
+  ~Boggle();
+  void fillBoardRandom();
+  void fillBoardUser(std::vector<char> letters);
+  void printBoard();
+  void findWords(Tile *prev, int i, int j);
+  void printWords();
+  void saveWords();
+  void clearWords();
 };
 
 #endif // GAME_H
