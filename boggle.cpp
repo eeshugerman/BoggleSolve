@@ -122,7 +122,7 @@ void Boggle::removeDuplicateWords() {
 void Boggle::printWords() {
   removeDuplicateWords();
 
-  for (int i = 0; i < (int)words.size(); i++) {
+  for (unsigned i = 0; i < words.size(); i++) {
     cout << words[i] << endl;
   }
 }
@@ -132,7 +132,7 @@ void Boggle::saveWords() {
 
   ofstream outFile("solution.txt");
 
-  for (int i = 0; i < (int)words.size(); i++) {
+  for (unsigned i = 0; i < words.size(); i++) {
     outFile << words[i] << endl;
   }
 }
