@@ -1,4 +1,3 @@
-
 #include "boggle.h"
 #include "dictionary.h"
 #include <fstream>
