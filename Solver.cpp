@@ -15,7 +15,6 @@ Solver::Solver(Dictionary* dict, Board* board) {
 }
 
 Solver::~Solver() {
-  delete dictionary;
   for (PathNode* node : garbage) {
     delete node;
   }

@@ -33,7 +33,9 @@ Dictionary::Dictionary() {
   words.close();
 }
 
-Dictionary::~Dictionary() { delete root; }
+Dictionary::~Dictionary() {
+  delete root;
+}
 
 int Dictionary::charToInt(char c) {
   int x = c - 'a';
