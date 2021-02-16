@@ -5,12 +5,11 @@
 
 # define ALPHABET_SIZE 26
 
-class Node {
-public:
-  Node();
-  ~Node();
-  Node *parent;
-  Node *children[ALPHABET_SIZE];
+struct TrieNode {
+  TrieNode();
+  ~TrieNode();
+  TrieNode *parent;
+  TrieNode *children[ALPHABET_SIZE];
   bool isWord;
 };
 
@@ -20,7 +19,7 @@ private:
   static const unsigned MAX_WORD_LENGTH = 16;
 
   int charToInt(char c);
-  Node *root;
+  TrieNode *root;
 
 public:
   Dictionary();

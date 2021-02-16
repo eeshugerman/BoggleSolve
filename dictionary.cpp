@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Node::Node() {
+TrieNode::TrieNode() {
   parent = NULL;
   isWord = false;
   for (int i = 0; i < ALPHABET_SIZE; i++) {
@@ -13,14 +13,14 @@ Node::Node() {
   }
 }
 
-Node::~Node() {
+TrieNode::~TrieNode() {
   for (int i = 0; i < ALPHABET_SIZE; i++) {
     delete children[i];
   }
 }
 
 Dictionary::Dictionary() {
-  root = new Node;
+  root = new TrieNode();
   ifstream words("english_words.txt");
   string line;
   while (getline(words, line)) {
@@ -40,7 +40,7 @@ int Dictionary::charToInt(char c) {
 }
 
 void Dictionary::addWord(string word) {
-  Node *node = root;
+  TrieNode* node = root;
   for (unsigned i = 0; i < word.length(); i++) {
     char letter = word[i];
     int childIdx = charToInt(letter);
@@ -48,7 +48,7 @@ void Dictionary::addWord(string word) {
       node = node->children[childIdx];
     }
     else {
-      Node *childNode = new Node;
+      TrieNode* childNode = new TrieNode();
       node->children[childIdx] = childNode;
       childNode->parent = node;
       node = childNode;
@@ -58,7 +58,7 @@ void Dictionary::addWord(string word) {
 }
 
 bool Dictionary::isPrefix(string word) {
-  Node *node = root;
+  TrieNode* node = root;
 
   for (unsigned i = 0; i < word.length(); i++) {
     char c = word[i];
@@ -78,7 +78,7 @@ bool Dictionary::isPrefix(string word) {
 }
 
 bool Dictionary::isWord(string word) {
-  Node *node = root;
+  TrieNode* node = root;
 
   for (unsigned i = 0; i < word.length(); i++) {
     char c = word[i];
