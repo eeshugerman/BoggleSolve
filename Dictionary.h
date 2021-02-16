@@ -19,7 +19,7 @@ private:
   static const unsigned MAX_WORD_LENGTH = 16;
 
   int charToInt(char c);
-  TrieNode *root;
+  TrieNode* root;
 
 public:
   Dictionary();

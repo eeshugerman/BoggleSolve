@@ -26,15 +26,13 @@ private:
   std::string buildWord(PathNode *node);
   bool isRepeat(PathNode* node);
   void removeDuplicateWords();
-  void findWordsFromNode(PathNode *prev, int i, int j);
+  void findWordsFromNode(PathNode* node);
 
 public:
   Solver(Dictionary *dict, Board *board);
   ~Solver();
   void findWords();
   void printWords();
-  // void saveWords();
-  // void clearWords();
 };
 
 #endif // GAME_H

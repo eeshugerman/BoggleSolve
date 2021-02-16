@@ -4,23 +4,6 @@
 #include <chrono>
 #include <random>
 
-Board::Board() {
-  // TODO: remove this?
-  for (int i = 0; i < BOARD_SIZE; i++) {
-    for (int j = 0; j < BOARD_SIZE; j++) {
-      tiles[i][j] = NULL;
-    }
-  }
-}
-
-Board::~Board() {
-  for (int i = 0; i < BOARD_SIZE; i++) {
-    for (int j = 0; j < BOARD_SIZE; j++) {
-      delete tiles[i][j];
-    }
-  }
-}
-
 void Board::fillBoardUser() {
   std::string msg =
     "Please enter one row at a time (4 letters, no spaces, "
@@ -38,39 +21,16 @@ void Board::fillBoardUser() {
     }
   }
 
-  // TODO: remove this?
-  for (int i = 0; i < BOARD_SIZE; i++) {
-    for (int j = 0; j < BOARD_SIZE; j++) {
-      if (tiles[i][j] != NULL) {
-        delete tiles[i][j];
-      }
-    }
-  }
-
   int k = 0;
   for (int i = 0; i < BOARD_SIZE; i++) {
     for (int j = 0; j < BOARD_SIZE; j++) {
-      Tile* tile = new Tile {
-        .letter = letters[k],
-        .i = i,
-        .j = j,
-      };
-
-      tiles[i][j] = tile;
+      tiles[i][j] = Tile { letters[k], i, j };
       k++;
     }
   }
 }
 
 void Board::fillBoardRandom() {
-  // TODO: remove this?
-  for (int i = 0; i < BOARD_SIZE; i++) {
-    for (int j = 0; j < BOARD_SIZE; j++) {
-      if (tiles[i][j] != NULL) {
-        delete tiles[i][j];
-      }
-    }
-  }
   unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
   std::uniform_int_distribution<int> distribution(0, ALPHABET_SIZE - 1);
   std::default_random_engine generator(seed);
@@ -79,20 +39,13 @@ void Board::fillBoardRandom() {
     for (int j = 0; j < BOARD_SIZE; j++) {
       int randInt = distribution(generator);
       char randChar = 'a' + randInt;
-
-      Tile* tile = new Tile {
-        .letter = randChar,
-        .i = i,
-        .j = j,
-      };
-
-      tiles[i][j] = tile;
+      tiles[i][j] = Tile { randChar, i, j };
     }
   }
 }
 
 char Board::getLetter(int i, int j) {
-  return tiles[i][j]->letter;
+  return tiles[i][j].letter;
 }
 
 bool Board::contains(int i, int j) {
@@ -104,7 +57,7 @@ bool Board::contains(int i, int j) {
 void Board::printBoard() {
   for (int i = 0; i < BOARD_SIZE; i++) {
     for (int j = 0; j < BOARD_SIZE; j++) {
-      std::cout << tiles[i][j]->letter << " ";
+      std::cout << tiles[i][j].letter << " ";
     }
     std::cout << std::endl;
   }

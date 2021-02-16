@@ -10,14 +10,8 @@ struct Tile {
 };
 
 class Board {
-private:
-  Tile *tiles[4][4];
-
 public:
   static const int BOARD_SIZE = 4;
-
-  Board();
-  ~Board();
 
   void fillBoardRandom();
   void fillBoardUser();
@@ -25,6 +19,10 @@ public:
   bool contains(int i, int j);
   void printBoard();
 
+private:
+  // should be on the heap perhaps, if we want
+  // to generalize to BOARD_SIZE > 4
+  Tile tiles[BOARD_SIZE][BOARD_SIZE];
 };
 
 #endif // BOARD_H

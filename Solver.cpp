@@ -15,28 +15,15 @@ Solver::Solver(Dictionary* dict, Board* board) {
 }
 
 Solver::~Solver() {
-  delete board;
   delete dictionary;
   for (PathNode* node : garbage) {
     delete node;
   }
 }
-
-// void Solver::clearWords() { words.clear(); }
-
-// void Solver::saveWords() {
-//   removeDuplicateWords();
-
-//   std::ofstream outFile("solution.txt");
-
-//   for (unsigned i = 0; i < words.size(); i++) {
-//     outFile << words[i] << std::endl;
-//   }
-// }
-
 bool Solver::isRepeat(PathNode* node) {
+  PathNode* prev;
   do {
-    PathNode* prev = node->prev;
+    prev = node->prev;
     if (prev->i == node->i and prev->j == node->j) {
       return true;
     }
@@ -86,16 +73,16 @@ void Solver::findWordsFromNode(PathNode* node) {
   if (dictionary->isPrefix(candidate)) {
     for (int iStep = -1; iStep <= 1; iStep++) {
       for (int jStep = -1; jStep <= 1; jStep++) {
-        int iNext = i + iStep;
-        int jNext = j + jStep;
+        int iNext = node->i + iStep;
+        int jNext = node->j + jStep;
 
-        if (board.contains(iNext, jNext)) {
+        if (board->contains(iNext, jNext)) {
           PathNode* next = new PathNode {
-            .letter = board.getLetter(iNext, jNext),
+            .letter = board->getLetter(iNext, jNext),
             .prev = node,
             .i = iNext, .j = jNext
           };
-          findWordsFromTile(next);
+          findWordsFromNode(next);
         }
       }
     }
@@ -103,10 +90,10 @@ void Solver::findWordsFromNode(PathNode* node) {
 }
 
 void Solver::findWords() {
-  for (int i = 0; i <= board.BOARD_SIZE; i++) {
-    for (int j = 0; j <= board.BOARD_SIZE; j++) {
+  for (int i = 0; i <= board->BOARD_SIZE; i++) {
+    for (int j = 0; j <= board->BOARD_SIZE; j++) {
       PathNode* start = new PathNode {
-        .letter = board.getLetter(i, j),
+        .letter = board->getLetter(i, j),
         .prev = NULL,
         .i = i, .j = j,
       };
