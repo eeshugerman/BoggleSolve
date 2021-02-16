@@ -1,8 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "board.h"
-#include "dictionary.h"
+#include "Board.h"
+#include "Dictionary.h"
 
 #include <string>
 #include <vector>

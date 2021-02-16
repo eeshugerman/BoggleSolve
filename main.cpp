@@ -1,5 +1,7 @@
-#include "solver.h"
-#include "dictionary.h"
+#include "Solver.h"
+#include "Dictionary.h"
+#include "Board.h"
+
 #include <fstream>
 #include <iostream>
 #include <limits>
@@ -10,6 +12,10 @@ using std::cin;
 using std::endl;
 
 int main() {
+  Board board = Board();
+  Dictionary dict = Dictionary();
+  Solver solver = Solver(&dict, &board);
+
   while (true) {
     cout << "------------------------" << endl;
     cout << "          Menu          " << endl;
@@ -25,20 +31,16 @@ int main() {
     cin.clear();
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    Board *board = new Board();
-    Dictionary *dict = new Dictionary();
-    Solver solver = Solver(dict, board);
-
     switch(choice) {
       case 1:
-        board->fillBoardRandom();
-        board->printBoard();
+        board.fillBoardRandom();
+        board.printBoard();
         break;
       case 2:
-        board->fillBoardUser();
+        board.fillBoardUser();
         break;
       case 3:
-        board->printBoard();
+        board.printBoard();
         break;
       case 4:
         solver.findWords();

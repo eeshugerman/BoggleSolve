@@ -1,5 +1,5 @@
-#include "board.h"
-#include "dictionary.h"
+#include "Board.h"
+#include "Dictionary.h"
 
 #include <chrono>
 #include <random>

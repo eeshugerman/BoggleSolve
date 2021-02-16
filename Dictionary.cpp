@@ -1,4 +1,5 @@
-#include "dictionary.h"
+#include "Dictionary.h"
+
 #include <fstream>
 #include <iostream>
 #include <string>

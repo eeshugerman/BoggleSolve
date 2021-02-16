@@ -1,5 +1,5 @@
-#include "solver.h"
-#include "dictionary.h"
+#include "Solver.h"
+#include "Dictionary.h"
 
 #include <algorithm>
 #include <chrono>
