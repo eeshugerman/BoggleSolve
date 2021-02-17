@@ -44,9 +44,8 @@ int Dictionary::charToInt(char c) {
 
 void Dictionary::addWord(string word) {
     TrieNode* node = root;
-    for (unsigned i = 0; i < word.length(); i++) {
-        char letter = word[i];
-        int childIdx = charToInt(letter);
+    for (char c : word) {
+        int childIdx = charToInt(c);
         if (node->children[childIdx]) {
             node = node->children[childIdx];
         }
@@ -63,8 +62,7 @@ void Dictionary::addWord(string word) {
 bool Dictionary::isPrefix(string word) {
     TrieNode* node = root;
 
-    for (unsigned i = 0; i < word.length(); i++) {
-        char c = word[i];
+    for (char c : word) {
         int x = charToInt(c);
         node = node->children[x];
         if (node == NULL) {
@@ -83,8 +81,7 @@ bool Dictionary::isPrefix(string word) {
 bool Dictionary::isWord(string word) {
     TrieNode* node = root;
 
-    for (unsigned i = 0; i < word.length(); i++) {
-        char c = word[i];
+    for (char c : word) {
         int x = charToInt(c);
         node = node->children[x];
         if (node == NULL) {
