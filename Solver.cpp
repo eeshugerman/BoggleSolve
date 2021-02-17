@@ -20,15 +20,12 @@ Solver::~Solver() {
     }
 }
 bool Solver::isRepeat(PathNode* node) {
-    PathNode* prev;
-    while (true) {
-        prev = node->prev;
-        if (prev == NULL) {
-            return false;
-        }
+    PathNode* prev = node->prev;
+    while (prev) {
         if (prev->i == node->i and prev->j == node->j) {
             return true;
         }
+        prev = prev->prev;
     }
     return false;
 }
@@ -50,8 +47,9 @@ void Solver::removeDuplicateWords() {
 }
 
 void Solver::printWords() {
-    for (unsigned i = 0; i < words.size(); i++) {
-        std::cout << words[i] << std::endl;
+    std::cout << "Found " << words.size() << " words:" << std::endl;
+        for (std::string word : words) {
+        std::cout << word << std::endl;
     }
 }
 
@@ -64,13 +62,9 @@ void Solver::findWordsFromNode(PathNode* node) {
 
     std::string candidate = buildWord(node);
 
-    // TODO: remove two letters check?
-    // if (node->prev != NULL and node->prev->prev != NULL) { // more than two
-    // letters
-    //   if (dictionary->isWord(candidate)) {
-    //     words.push_back(candidate);
-    //   }
-    // }
+    if (dictionary->isWord(candidate)) {
+        words.push_back(candidate);
+    }
 
     if (dictionary->isPrefix(candidate)) {
         for (int iStep = -1; iStep <= 1; iStep++) {
@@ -79,11 +73,12 @@ void Solver::findWordsFromNode(PathNode* node) {
                 int jNext = node->j + jStep;
 
                 if (board->contains(iNext, jNext)) {
-                    PathNode* next =
-                        new PathNode { .letter = board->getLetter(iNext, jNext),
-                                       .prev = node,
-                                       .i = iNext,
-                                       .j = jNext };
+                    PathNode* next = new PathNode {
+                        .letter = board->getLetter(iNext, jNext),
+                        .prev = node,
+                        .i = iNext,
+                        .j = jNext
+                    };
                     findWordsFromNode(next);
                 }
             }
