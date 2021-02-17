@@ -15,6 +15,7 @@ Solver::Solver(Dictionary* dict, Board* board) {
 }
 
 Solver::~Solver() {
+    // TODO: makes copy?
     for (PathNode* node : garbage) {
         delete node;
     }

@@ -9,26 +9,17 @@ Board::Board() {
 }
 
 void Board::fillBoardUser() {
-    std::string msg = "Please enter one row at a time (4 letters, no spaces, "
-                      "lowercase), each followed by the enter key.";
+    std::string msg =
+        "Please enter one row at a time (4 letters, no spaces, "
+        "lowercase), each followed by the enter key.";
 
     std::cout << msg << std::endl;
 
-    std::vector<char> letters;
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < BOARD_SIZE; i++) {
         char row[4];
         std::cin >> row;
-
-        for (int i = 0; i < 4; i++) {
-            letters.push_back(row[i]);
-        }
-    }
-
-    int k = 0;
-    for (int i = 0; i < BOARD_SIZE; i++) {
         for (int j = 0; j < BOARD_SIZE; j++) {
-            tiles[i][j] = Tile { letters[k], i, j };
-            k++;
+            tiles[i][j] = Tile { row[j], i, j };
         }
     }
 }

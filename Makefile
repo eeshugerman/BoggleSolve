@@ -4,7 +4,7 @@ CFLAGS = -g -Wall
 BoggleSolve: main.o Solver.o Board.o Dictionary.o
 	$(CC) $(CFLAGS) -o BoggleSolve main.o Solver.o Board.o Dictionary.o
 
-main.o: main.cpp Solver.h Dictionary.h Board.h
+main.o: main.cpp Board.h Dictionary.h Solver.h
 	$(CC) $(CFLAGS) -c main.cpp
 
 Solver.o: Solver.cpp Solver.h Dictionary.h
