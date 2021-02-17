@@ -1,5 +1,5 @@
-#ifndef PREFIXDICTIONARY_H
-#define PREFIXDICTIONARY_H
+#ifndef DICTIONARY_H
+#define DICTIONARY_H
 #include <iostream>
 #include <string>
 
@@ -29,4 +29,4 @@ class Dictionary { // as a trie, aka prefix tree
     bool isPrefix(std::string word);
 };
 
-#endif // PREFIXDICTIONARY_H
+#endif // DICTIONARY_H

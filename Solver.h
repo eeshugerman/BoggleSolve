@@ -1,5 +1,5 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef SOLVER_H
+#define SOLVER_H
 
 #include "Board.h"
 #include "Dictionary.h"
@@ -35,4 +35,4 @@ class Solver {
     void printWords();
 };
 
-#endif // GAME_H
+#endif // SOLVER_H
