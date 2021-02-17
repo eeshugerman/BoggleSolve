@@ -1,7 +1,7 @@
 ﻿# -*- mode: yaml -*-
 PointerAlignment: Left
 BreakBeforeBinaryOperators: NonAssignment
-IndentWidth: 2
+IndentWidth: 4
 Cpp11BracedListStyle: false
 SpaceBeforeCpp11BracedList: true
 BreakBeforeBraces: Custom

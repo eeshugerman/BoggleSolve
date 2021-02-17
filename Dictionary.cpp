@@ -7,90 +7,90 @@
 using namespace std;
 
 TrieNode::TrieNode() {
-  parent = NULL;
-  isWord = false;
-  for (int i = 0; i < ALPHABET_SIZE; i++) {
-    children[i] = NULL;
-  }
+    parent = NULL;
+    isWord = false;
+    for (int i = 0; i < ALPHABET_SIZE; i++) {
+        children[i] = NULL;
+    }
 }
 
 TrieNode::~TrieNode() {
-  for (int i = 0; i < ALPHABET_SIZE; i++) {
-    delete children[i];
-  }
+    for (int i = 0; i < ALPHABET_SIZE; i++) {
+        delete children[i];
+    }
 }
 
 Dictionary::Dictionary() {
-  root = new TrieNode();
-  ifstream words("english_words.txt");
-  string line;
-  while (getline(words, line)) {
-    const unsigned wordLength = line.length();
-    if (MIN_WORD_LENGTH <= wordLength and wordLength <= MAX_WORD_LENGTH) {
-      addWord(line);
+    root = new TrieNode();
+    ifstream words("english_words.txt");
+    string line;
+    while (getline(words, line)) {
+        const unsigned wordLength = line.length();
+        if (MIN_WORD_LENGTH <= wordLength and wordLength <= MAX_WORD_LENGTH) {
+            addWord(line);
+        }
     }
-  }
-  words.close();
+    words.close();
 }
 
 Dictionary::~Dictionary() {
-  delete root;
+    delete root;
 }
 
 int Dictionary::charToInt(char c) {
-  int x = c - 'a';
-  return x;
+    int x = c - 'a';
+    return x;
 }
 
 void Dictionary::addWord(string word) {
-  TrieNode* node = root;
-  for (unsigned i = 0; i < word.length(); i++) {
-    char letter = word[i];
-    int childIdx = charToInt(letter);
-    if (node->children[childIdx]) {
-      node = node->children[childIdx];
+    TrieNode* node = root;
+    for (unsigned i = 0; i < word.length(); i++) {
+        char letter = word[i];
+        int childIdx = charToInt(letter);
+        if (node->children[childIdx]) {
+            node = node->children[childIdx];
+        }
+        else {
+            TrieNode* childNode = new TrieNode();
+            node->children[childIdx] = childNode;
+            childNode->parent = node;
+            node = childNode;
+        }
     }
-    else {
-      TrieNode* childNode = new TrieNode();
-      node->children[childIdx] = childNode;
-      childNode->parent = node;
-      node = childNode;
-    }
-  }
-  node->isWord = true;
+    node->isWord = true;
 }
 
 bool Dictionary::isPrefix(string word) {
-  TrieNode* node = root;
+    TrieNode* node = root;
 
-  for (unsigned i = 0; i < word.length(); i++) {
-    char c = word[i];
-    int x = charToInt(c);
-    node = node->children[x];
-    if (node == NULL) {
-      return false;
+    for (unsigned i = 0; i < word.length(); i++) {
+        char c = word[i];
+        int x = charToInt(c);
+        node = node->children[x];
+        if (node == NULL) {
+            return false;
+        }
     }
-  }
 
-  for (int x = 0; x < ALPHABET_SIZE; x++) {
-    if (node->children[x]) {
-      return true;
+    for (int x = 0; x < ALPHABET_SIZE; x++) {
+        if (node->children[x]) {
+            return true;
+        }
     }
-  }
-  return false;
+    return false;
 }
 
 bool Dictionary::isWord(string word) {
-  TrieNode* node = root;
+    TrieNode* node = root;
 
-  for (unsigned i = 0; i < word.length(); i++) {
-    char c = word[i];
-    int x = charToInt(c);
-    node = node->children[x];
-    if (node == NULL) {
-      return false;
+    for (unsigned i = 0; i < word.length(); i++) {
+        char c = word[i];
+        int x = charToInt(c);
+        node = node->children[x];
+        if (node == NULL) {
+            return false;
+        }
     }
-  }
 
-  return node->isWord;
+    return node->isWord;
 }
