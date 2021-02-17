@@ -1,14 +1,14 @@
-#include "Solver.h"
-#include "Dictionary.h"
 #include "Board.h"
+#include "Dictionary.h"
+#include "Solver.h"
 
 #include <fstream>
 #include <iostream>
 #include <limits>
 #include <vector>
 
-using std::cout;
 using std::cin;
+using std::cout;
 using std::endl;
 
 int main() {
@@ -31,27 +31,27 @@ int main() {
     cin.clear();
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-    switch(choice) {
-      case 1:
-        board.fillBoardRandom();
-        board.printBoard();
-        break;
-      case 2:
-        board.fillBoardUser();
-        break;
-      case 3:
-        board.printBoard();
-        break;
-      case 4:
-        solver.findWords();
-        solver.printWords();
-        break;
-      case 5:
-        cout << "Goodbye!" << endl;
-        return 0;
-      default:
-        cout << "Invalid option, please try again." << endl;
-        break;
+    switch (choice) {
+    case 1:
+      board.fillBoardRandom();
+      board.printBoard();
+      break;
+    case 2:
+      board.fillBoardUser();
+      break;
+    case 3:
+      board.printBoard();
+      break;
+    case 4:
+      solver.findWords();
+      solver.printWords();
+      break;
+    case 5:
+      cout << "Goodbye!" << endl;
+      return 0;
+    default:
+      cout << "Invalid option, please try again." << endl;
+      break;
     }
   }
 }

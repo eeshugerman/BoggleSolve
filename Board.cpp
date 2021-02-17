@@ -9,9 +9,8 @@ Board::Board() {
 }
 
 void Board::fillBoardUser() {
-  std::string msg =
-    "Please enter one row at a time (4 letters, no spaces, "
-    "lowercase), each followed by the enter key.";
+  std::string msg = "Please enter one row at a time (4 letters, no spaces, "
+                    "lowercase), each followed by the enter key.";
 
   std::cout << msg << std::endl;
 
@@ -53,9 +52,7 @@ char Board::getLetter(int i, int j) {
 }
 
 bool Board::contains(int i, int j) {
-  return
-    (0 <= i and i < BOARD_SIZE) and
-    (0 <= j and j < BOARD_SIZE);
+  return (0 <= i and i < BOARD_SIZE) and (0 <= j and j < BOARD_SIZE);
 }
 
 void Board::printBoard() {

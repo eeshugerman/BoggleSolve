@@ -18,3 +18,6 @@ Dictionary.o: Dictionary.cpp Dictionary.h
 
 clean:
 	rm -f BoggleSolve main.o Solver.o Dictionary.o Board.o Dictionary.o
+
+format:
+	clang-format -i *.cpp *.h

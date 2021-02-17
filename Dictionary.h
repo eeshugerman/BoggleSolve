@@ -3,13 +3,13 @@
 #include <iostream>
 #include <string>
 
-# define ALPHABET_SIZE 26
+#define ALPHABET_SIZE 26
 
 struct TrieNode {
   TrieNode();
   ~TrieNode();
-  TrieNode *parent;
-  TrieNode *children[ALPHABET_SIZE];
+  TrieNode* parent;
+  TrieNode* children[ALPHABET_SIZE];
   bool isWord;
 };
 

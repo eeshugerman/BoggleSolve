@@ -44,7 +44,6 @@ std::string Solver::buildWord(PathNode* node) {
   return word;
 }
 
-
 void Solver::removeDuplicateWords() {
   sort(words.begin(), words.end());
   words.erase(unique(words.begin(), words.end()), words.end());
@@ -66,7 +65,8 @@ void Solver::findWordsFromNode(PathNode* node) {
   std::string candidate = buildWord(node);
 
   // TODO: remove two letters check?
-  // if (node->prev != NULL and node->prev->prev != NULL) { // more than two letters
+  // if (node->prev != NULL and node->prev->prev != NULL) { // more than two
+  // letters
   //   if (dictionary->isWord(candidate)) {
   //     words.push_back(candidate);
   //   }
@@ -79,11 +79,11 @@ void Solver::findWordsFromNode(PathNode* node) {
         int jNext = node->j + jStep;
 
         if (board->contains(iNext, jNext)) {
-          PathNode* next = new PathNode {
-            .letter = board->getLetter(iNext, jNext),
-            .prev = node,
-            .i = iNext, .j = jNext
-          };
+          PathNode* next =
+              new PathNode { .letter = board->getLetter(iNext, jNext),
+                             .prev = node,
+                             .i = iNext,
+                             .j = jNext };
           findWordsFromNode(next);
         }
       }
@@ -97,7 +97,8 @@ void Solver::findWords() {
       PathNode* start = new PathNode {
         .letter = board->getLetter(i, j),
         .prev = NULL,
-        .i = i, .j = j,
+        .i = i,
+        .j = j,
       };
       findWordsFromNode(start);
     }

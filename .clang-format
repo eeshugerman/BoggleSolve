@@ -1,0 +1,10 @@
+﻿# -*- mode: yaml -*-
+PointerAlignment: Left
+BreakBeforeBinaryOperators: NonAssignment
+IndentWidth: 2
+Cpp11BracedListStyle: false
+SpaceBeforeCpp11BracedList: true
+BreakBeforeBraces: Custom
+AllowShortFunctionsOnASingleLine: Empty
+BraceWrapping:
+  BeforeElse: true
