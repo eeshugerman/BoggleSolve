@@ -4,6 +4,10 @@
 #include <chrono>
 #include <random>
 
+Board::Board() {
+  fillBoardRandom();
+}
+
 void Board::fillBoardUser() {
   std::string msg =
     "Please enter one row at a time (4 letters, no spaces, "

@@ -11,7 +11,7 @@
 
 Solver::Solver(Dictionary* dict, Board* board) {
   dictionary = dict;
-  board = board;
+  this->board = board;
 }
 
 Solver::~Solver() {
@@ -21,12 +21,15 @@ Solver::~Solver() {
 }
 bool Solver::isRepeat(PathNode* node) {
   PathNode* prev;
-  do {
+  while (true) {
     prev = node->prev;
+    if (prev == NULL) {
+      return false;
+    }
     if (prev->i == node->i and prev->j == node->j) {
       return true;
     }
-  } while (prev);
+  }
   return false;
 }
 
@@ -63,11 +66,11 @@ void Solver::findWordsFromNode(PathNode* node) {
   std::string candidate = buildWord(node);
 
   // TODO: remove two letters check?
-  if (node->prev != NULL and node->prev->prev != NULL) { // more than two letters
-    if (dictionary->isWord(candidate)) {
-      words.push_back(candidate);
-    }
-  }
+  // if (node->prev != NULL and node->prev->prev != NULL) { // more than two letters
+  //   if (dictionary->isWord(candidate)) {
+  //     words.push_back(candidate);
+  //   }
+  // }
 
   if (dictionary->isPrefix(candidate)) {
     for (int iStep = -1; iStep <= 1; iStep++) {

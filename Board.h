@@ -13,6 +13,7 @@ class Board {
 public:
   static const int BOARD_SIZE = 4;
 
+  Board();
   void fillBoardRandom();
   void fillBoardUser();
   char getLetter(int i, int j);
@@ -21,7 +22,7 @@ public:
 
 private:
   // should be on the heap perhaps, if we want
-  // to generalize to BOARD_SIZE > 4
+  // to generalize to BOARD_SIZE >> 4
   Tile tiles[BOARD_SIZE][BOARD_SIZE];
 };
 
