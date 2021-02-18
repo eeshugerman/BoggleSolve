@@ -22,7 +22,7 @@ To check if *s* is a prefix or a word, a dictionary is needed. The dictionary is
 
 ```bash
 make
-./BoggleSolve
+./boggle
 ```
 
 ## Notes / To Do
@@ -33,4 +33,4 @@ make
 
 
 ## Demo
-![valgrind demo](tty.gif "")
+![valgrind demo](demo.webm "")
