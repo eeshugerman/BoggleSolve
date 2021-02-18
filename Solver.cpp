@@ -88,8 +88,8 @@ void Solver::findWordsFromNode(PathNode* node) {
 }
 
 void Solver::findWords() {
-    for (int i = 0; i <= board->BOARD_SIZE; i++) {
-        for (int j = 0; j <= board->BOARD_SIZE; j++) {
+    for (int i = 0; i < board->BOARD_SIZE; i++) {
+        for (int j = 0; j < board->BOARD_SIZE; j++) {
             PathNode* start = new PathNode {
                 .letter = board->getLetter(i, j),
                 .prev = NULL,
