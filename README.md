@@ -33,4 +33,4 @@ make
 
 
 ## Demo
-![valgrind demo](demo.webm "")
+![valgrind demo](demo.webp "")
