@@ -1,8 +1,8 @@
 CC = g++
 CFLAGS = -g -Wall
 
-BoggleSolve: main.o Solver.o Board.o Dictionary.o
-	$(CC) $(CFLAGS) -o BoggleSolve main.o Solver.o Board.o Dictionary.o
+boggle: main.o Solver.o Board.o Dictionary.o
+	$(CC) $(CFLAGS) -o boggle main.o Solver.o Board.o Dictionary.o
 
 main.o: main.cpp Board.h Dictionary.h Solver.h
 	$(CC) $(CFLAGS) -c main.cpp
@@ -21,3 +21,6 @@ clean:
 
 format:
 	clang-format -i *.cpp *.h
+
+valgrind: boggle
+	valgrind --leak-check=full --show-leak-kinds=all ./boggle
