@@ -14,11 +14,11 @@ class Board {
     static const int BOARD_SIZE = 4;
 
     Board();
-    void fillBoardRandom();
-    void fillBoardUser();
+    void fillRandom();
+    void fillCustom();
     char getLetter(int i, int j);
     bool contains(int i, int j);
-    void printBoard();
+    void print();
 
   private:
     // should be on the heap perhaps, if we want

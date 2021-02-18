@@ -23,7 +23,7 @@ int main() {
         cout << "1. New random board" << endl;
         cout << "2. New custom board" << endl;
         cout << "3. Print board" << endl;
-        cout << "4. Print possible words" << endl;
+        cout << "4. Solve board" << endl;
         cout << "5. Quit" << endl;
 
         int choice;
@@ -33,14 +33,14 @@ int main() {
 
         switch (choice) {
         case 1:
-            board.fillBoardRandom();
-            board.printBoard();
+            board.fillRandom();
+            board.print();
             break;
         case 2:
-            board.fillBoardUser();
+            board.fillCustom();
             break;
         case 3:
-            board.printBoard();
+            board.print();
             break;
         case 4:
             solver.findWords();

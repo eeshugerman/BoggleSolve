@@ -5,10 +5,10 @@
 #include <random>
 
 Board::Board() {
-    fillBoardRandom();
+    fillRandom();
 }
 
-void Board::fillBoardUser() {
+void Board::fillCustom() {
     std::string msg =
         "Please enter one row at a time (4 letters, no spaces, "
         "lowercase), each followed by the enter key.";
@@ -24,7 +24,7 @@ void Board::fillBoardUser() {
     }
 }
 
-void Board::fillBoardRandom() {
+void Board::fillRandom() {
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::uniform_int_distribution<int> distribution(0, ALPHABET_SIZE - 1);
     std::default_random_engine generator(seed);
@@ -46,7 +46,7 @@ bool Board::contains(int i, int j) {
     return (0 <= i and i < BOARD_SIZE) and (0 <= j and j < BOARD_SIZE);
 }
 
-void Board::printBoard() {
+void Board::print() {
     for (int i = 0; i < BOARD_SIZE; i++) {
         for (int j = 0; j < BOARD_SIZE; j++) {
             std::cout << tiles[i][j].letter << " ";

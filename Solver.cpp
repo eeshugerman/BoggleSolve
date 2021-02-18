@@ -15,11 +15,11 @@ Solver::Solver(Dictionary* dict, Board* board) {
 }
 
 Solver::~Solver() {
-    // TODO: makes copy?
     for (PathNode* node : garbage) {
         delete node;
     }
 }
+
 bool Solver::isRepeat(PathNode* node) {
     PathNode* prev = node->prev;
     while (prev) {
