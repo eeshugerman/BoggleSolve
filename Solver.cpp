@@ -92,6 +92,7 @@ void Solver::findWordsFromNode(PathNode* node) {
 }
 
 void Solver::findWords() {
+    words.clear();
     for (int i = 0; i < board->BOARD_SIZE; i++) {
         for (int j = 0; j < board->BOARD_SIZE; j++) {
             PathNode* start = new PathNode {
