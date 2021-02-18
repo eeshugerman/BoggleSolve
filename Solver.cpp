@@ -67,22 +67,26 @@ void Solver::findWordsFromNode(PathNode* node) {
         words.push_back(candidate);
     }
 
-    if (dictionary->isPrefix(candidate)) {
-        for (int iStep = -1; iStep <= 1; iStep++) {
-            for (int jStep = -1; jStep <= 1; jStep++) {
-                int iNext = node->i + iStep;
-                int jNext = node->j + jStep;
+    if (!dictionary->isPrefix(candidate)) {
+        return;
+    }
 
-                if (board->contains(iNext, jNext)) {
-                    PathNode* next = new PathNode {
-                        .letter = board->getLetter(iNext, jNext),
-                        .prev = node,
-                        .i = iNext,
-                        .j = jNext
-                    };
-                    findWordsFromNode(next);
-                }
+    for (int iStep = -1; iStep <= 1; iStep++) {
+        for (int jStep = -1; jStep <= 1; jStep++) {
+            int iNext = node->i + iStep;
+            int jNext = node->j + jStep;
+
+            if (!board->contains(iNext, jNext)) {
+                continue;
             }
+
+            PathNode* next = new PathNode {
+                .letter = board->getLetter(iNext, jNext),
+                .prev = node,
+                .i = iNext,
+                .j = jNext
+            };
+            findWordsFromNode(next);
         }
     }
 }
