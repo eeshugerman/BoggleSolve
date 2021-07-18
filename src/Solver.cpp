@@ -49,7 +49,7 @@ void Solver::removeDuplicateWords() {
 
 void Solver::printWords() {
     std::cout << "Found " << words.size() << " words:" << std::endl;
-        for (std::string word : words) {
+    for (std::string word : words) {
         std::cout << word << std::endl;
     }
 }
@@ -80,12 +80,11 @@ void Solver::findWordsFromNode(PathNode* node) {
                 continue;
             }
 
-            PathNode* next = new PathNode {
-                .letter = board->getLetter(iNext, jNext),
-                .prev = node,
-                .i = iNext,
-                .j = jNext
-            };
+            PathNode* next =
+                new PathNode { .letter = board->getLetter(iNext, jNext),
+                               .prev = node,
+                               .i = iNext,
+                               .j = jNext };
             findWordsFromNode(next);
         }
     }

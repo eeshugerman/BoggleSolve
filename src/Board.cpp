@@ -9,9 +9,8 @@ Board::Board() {
 }
 
 void Board::fillCustom() {
-    std::string msg =
-        "Please enter one row at a time (4 letters, no spaces, "
-        "lowercase), each followed by the enter key.";
+    std::string msg = "Please enter one row at a time (4 letters, no spaces, "
+                      "lowercase), each followed by the enter key.";
 
     std::cout << msg << std::endl;
 

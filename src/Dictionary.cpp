@@ -22,7 +22,8 @@ TrieNode::~TrieNode() {
 
 Dictionary::Dictionary() {
     root = new TrieNode();
-    ifstream words("english_words.txt");
+
+    ifstream words("english_words.txt"); // TODO: don't hardcode this
     string line;
     while (getline(words, line)) {
         const unsigned wordLength = line.length();

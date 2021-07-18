@@ -1,26 +1,28 @@
 CC = g++
 CFLAGS = -g -Wall
 
+srcdir = src
+
 boggle: main.o Solver.o Board.o Dictionary.o
 	$(CC) $(CFLAGS) -o boggle main.o Solver.o Board.o Dictionary.o
 
-main.o: main.cpp Board.h Dictionary.h Solver.h
-	$(CC) $(CFLAGS) -c main.cpp
+main.o: $(srcdir)/main.cpp $(srcdir)/Board.h $(srcdir)/Dictionary.h $(srcdir)/Solver.h
+	$(CC) $(CFLAGS) -c $(srcdir)/main.cpp
 
-Solver.o: Solver.cpp Solver.h Dictionary.h
-	$(CC) $(CFLAGS) -c Solver.cpp
+Solver.o: $(srcdir)/Solver.cpp $(srcdir)/Solver.h $(srcdir)/Dictionary.h
+	$(CC) $(CFLAGS) -c $(srcdir)/Solver.cpp
 
-Board.o: Board.cpp Board.h Dictionary.h
-	$(CC) $(CFLAGS) -c Board.cpp
+Board.o: $(srcdir)/Board.cpp $(srcdir)/Board.h $(srcdir)/Dictionary.h
+	$(CC) $(CFLAGS) -c $(srcdir)/Board.cpp
 
-Dictionary.o: Dictionary.cpp Dictionary.h
-	$(CC) $(CFLAGS) -c Dictionary.cpp
+Dictionary.o: $(srcdir)/Dictionary.cpp $(srcdir)/Dictionary.h
+	$(CC) $(CFLAGS) -c $(srcdir)/Dictionary.cpp
 
 clean:
-	rm -f BoggleSolve main.o Solver.o Dictionary.o Board.o Dictionary.o
+	rm boggle *.o
 
 format:
-	clang-format -i *.cpp *.h
+	clang-format -i $(srcdir)/*.cpp $(srcdir)/*.h
 
 valgrind: boggle
 	valgrind --leak-check=full --show-leak-kinds=all ./boggle
