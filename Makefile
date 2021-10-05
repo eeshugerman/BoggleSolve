@@ -1,28 +1,26 @@
+# mostly based on http://nuclear.mutantstargoat.com/articles/make
+
 CC = g++
-CFLAGS = -g -Wall
+CPPFLAGS = -Wall -Wextra -Werror -MMD
 
-srcdir = src
+header = $(wildcard src/*.h)
+src = $(wildcard src/*.cpp)
+obj = $(src:.cpp=.o)
+dep = $(obj:.o=.d)
 
-boggle: main.o Solver.o Board.o Dictionary.o
-	$(CC) $(CFLAGS) -o boggle main.o Solver.o Board.o Dictionary.o
+boggle: $(obj)
+	$(CC) -o $@ $^
 
-main.o: $(srcdir)/main.cpp $(srcdir)/Board.h $(srcdir)/Dictionary.h $(srcdir)/Solver.h
-	$(CC) $(CFLAGS) -c $(srcdir)/main.cpp
+-include $(dep)
 
-Solver.o: $(srcdir)/Solver.cpp $(srcdir)/Solver.h $(srcdir)/Dictionary.h
-	$(CC) $(CFLAGS) -c $(srcdir)/Solver.cpp
-
-Board.o: $(srcdir)/Board.cpp $(srcdir)/Board.h $(srcdir)/Dictionary.h
-	$(CC) $(CFLAGS) -c $(srcdir)/Board.cpp
-
-Dictionary.o: $(srcdir)/Dictionary.cpp $(srcdir)/Dictionary.h
-	$(CC) $(CFLAGS) -c $(srcdir)/Dictionary.cpp
-
+.PHONY: clean
 clean:
-	rm boggle *.o
+	rm -f boggle $(obj) $(dep)
 
+.PHONY: format
 format:
-	clang-format -i $(srcdir)/*.cpp $(srcdir)/*.h
+	clang-format -i $(header) $(src)
 
+.PHONY: valgrind
 valgrind: boggle
 	valgrind --leak-check=full --show-leak-kinds=all ./boggle
