@@ -27,10 +27,6 @@ make
 
 ## Notes / To Do
 
-+ Typically, Boggle has no 'Q' tiles; instead there are 'Qu' tiles. In this program, all tiles have one letter and 'Q's are treated as any other letter.
-+ Typically, Boggle does not have an equal distribution of tiles across letters -- there are more 'A's than 'X's, for example. In this program, when option (1) "New random board" is selected, letters are generated with equal probability.
-+ Checks on user input should be added for option (2) "New custom board". As of now, only lowercase letters will give correct behavior, but other charectors are not rejected.
-
-
-## Demo
-![valgrind demo](demo.webp "")
+- Typically, Boggle has no 'Q' tiles; instead there are 'Qu' tiles. In this program, all tiles have one letter and 'Q's are treated as any other letter.
+- Typically, Boggle does not have an equal distribution of tiles across letters -- there are more 'A's than 'X's, for example. In this program, when option (1) "New random board" is selected, letters are generated with equal probability.
+- Checks on user input should be added for option (2) "New custom board". As of now, only lowercase letters will give correct behavior, but other charectors are not rejected.
